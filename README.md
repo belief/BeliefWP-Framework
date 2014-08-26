@@ -11,9 +11,9 @@ This is the template Theme for Wordpress by Belief. This current theme is design
 1. Run script to replace all occurrences of "BELIEF_THEME_TITLE" to "Client Name". Use display preferences.
 
 For Gulp:
-1. ensure npm is installed.
-2. npm install (sudo may be required)
-3. gulp
+	1. ensure npm is installed.
+	2. npm install (sudo may be required)
+	3. gulp
 
 ###A few frameworks to be aware of:
 
