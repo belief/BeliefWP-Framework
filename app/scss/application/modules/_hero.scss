@@ -1,0 +1,132 @@
+/* ==============
+    MOBILE: Hero
+   ============== */
+
+.hero-container {
+    @include media($small-medium) {
+        padding: 20px 25px 25px 25px;
+        @include calc( width, '100% - 50px');
+    }
+}
+
+.hero {
+    width: 100%;
+    padding-bottom: 56.25%; /* 9:16 ratio */
+    height: 0;
+    position: relative;
+}
+
+#hero-video-preview {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    @include media($small) {
+        display: inline;
+    }
+}
+
+.hero-preview-filter:before {
+    @include media($small) {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+        z-index: 10;
+        opacity: 1;
+        background: url('images/overlay-texture-50op@1x.png');
+        background-size: 20px;
+    }
+}
+
+#hero-video-player {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+
+    @include media($small) {
+        display: none;
+    }
+}
+
+.hero .play-video-btn {
+    width: 60px;
+    height: 60px;
+    display: none;
+    z-index: 10;
+    border-radius: 50%;
+    background: rgb(240,0,0);
+    text-indent: -9999em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -30px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -o-transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+        background: $kerf-red-semi-trans;
+        cursor: pointer;
+    }
+
+    &:after {
+        content: " ";
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        margin-left: -5px;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 15px;
+        border-left-color: #FFF;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    @include media($small) {
+        display: block;
+    }
+
+    @include media($medium-large) {
+        width: 80px;
+        height: 80px;
+
+        &:after {
+            margin-left: -7px;
+            border-width: 25px;
+        }
+    }
+
+    @include media($large) {
+        width: 110px;
+        height: 110px;
+
+        &:after {
+            margin-left: -10px;
+            border-width: 35px;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+
+/* ===============
+    Header
+   =============== */
+
+.header-container {
+    min-width: 310px;
+    padding-top: 50px;
+    padding-bottom: 40px;
+
+    @include media($small-medium) {
+      padding-bottom: 20px;
+    }
+
+    @include media($medium) {
+      .wrapper {
+        padding: 0 40px;
+      @include calc( width, '100% - 110px');
+      }
+    }
+}

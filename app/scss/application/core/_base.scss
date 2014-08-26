@@ -1,0 +1,111 @@
+* {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+html {
+    font-size: $medium-font;
+    line-height: 1.4;
+}
+
+::-moz-selection,
+::selection {
+    background: $highlight-selection;
+    text-shadow: none;
+}
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+body {
+    color: $dark-gray;
+    font-family: "adelle-sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.wrapper {
+    position: relative;
+    @include calc( width, '100% - 40px');
+    margin: 0 20px;
+}
+
+.site-logo {
+    float: left;
+    width: 120px;
+    height: 52px;
+    // background-image: url('images/kerflogo.svg');
+    // background-size: contain;
+    // background-repeat: no-repeat;
+
+    @include media($small-medium) {
+        margin-left: 20px;
+        margin-top: -1px;
+    }
+}
+
+p {
+    font-size: $medium-font;
+    line-height: 25px;
+    font-weight: normal;
+
+    @include media($small-medium) {
+        font-size: $small-font;
+        line-height: 22px;
+    }
+}
+
+h1 {
+    font-weight: bolder;
+    font-size: $x-large-font;
+    line-height: 40px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: $dark-gray;
+    margin-bottom: 0;
+    font-size: $large-font;
+    font-weight: 200;
+}
+
+h3 {
+    font-size:  $medium-font;
+    font-weight: bold;
+}
+
+a {
+    color: $kerf-red;
+    text-decoration: underline;
+    font-weight: normal;
+
+    &:hover {
+        color: #000;
+    }
+}
+
+.ie7 {
+    padding-top: 20px;
+}
