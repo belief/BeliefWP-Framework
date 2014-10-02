@@ -9,6 +9,7 @@ require.config({
         ],
         jqueryui: [
           'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min',
+          'vendor/jqueryui.min.js'
         ],
         modernizr: 'vendor/modernizr',
         fastclick: 'vendor/fastclick',
@@ -18,6 +19,8 @@ require.config({
         isotope: 'vendor/isotope',
         mediaelement: 'vendor/mediaelement',
         spin: 'vendor/spin.min',
+        imagesloaded: 'vendor/imagesloaded.pkgd.min',
+        masonry: 'vendor/masonry.pkgd.min',
         _common: 'modules/_common',
         _nav: 'modules/_nav',
         _formpages: 'modules/_formpages'
@@ -30,6 +33,6 @@ require.config({
     }
 });
 
-require(['_common'], function(runMethod) {
+require(['_common modernizr'], function(runMethod) {
   runMethod.init($(window),$(document));
 });

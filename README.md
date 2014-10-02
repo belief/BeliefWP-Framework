@@ -1,14 +1,16 @@
-##BELIEF_THEME_TEMPLATE
+##BELIEF THEME TEMPLATE
 
 ###General Info
 
-This is the template Theme for Wordpress by Belief. This current theme is designed under Wordpress version 3.9.2. There are a few vendor projects included in this template, and for the most part the dependancies are listed through gulp, etc.
+This is the template Theme for Wordpress by Belief. This current theme is designed under Wordpress version 4.0.0 There are a few vendor projects included in this template with gulp and requirejs, and for the most part the dependancies are listed through gulp, etc.
 
 ###Before Install:
-1. Run script to replace all occurrences of "BELIEF_THEME_TEMPLATE" to "Client_name". Use underscore and Front Caps.
-2. Run script to replace all occurrences of "belief_theme_slug" to "client_slug". Use underscore and all lowercase.
-3.  Run script to replace all occurrences of "Belief_Theme_Classes" to "Client_Classes". Use underscore and all Front Caps.
-1. Run script to replace all occurrences of "BELIEF_THEME_TITLE" to "Client Name". Use display preferences.
+1. go to your wp-config file and add a define method:
+
+	define( 'BELIEF_THEME_SLUG', '[[Theme Slug Name Here]]');
+
+2. remove the define method in app/util/constants
+3. filter through js modules and vendors depending on scope of project.
 
 ###For Gulp:
 	1. ensure npm is installed.
@@ -22,15 +24,4 @@ This is the template Theme for Wordpress by Belief. This current theme is design
 ###A few frameworks to be aware of:
 
 - http://www.billerickson.net/wordpress-metaboxes/
-- 
-
-###If Running Gulp and running into gulp-scss-lint error, change the following code:
-
-```
-#line 49:
-if (error && error.code !== 65) {
-
-#to:
-if (error && error.code !== 65 && error.code !== 1 && error.code !== 2) {
-
-```
+- http://codex.wordpress.org/Template_Hierarchy

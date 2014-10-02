@@ -114,7 +114,7 @@ class Belief_Design {
 
   /**
    * Initialize Metabox Class
-   * see /lib/metabox/example-functions.php for more information
+   * see /app/admin/metabox/example-functions.php for more information
    *
    */
   public function be_initialize_cmb_meta_boxes() {
@@ -147,15 +147,8 @@ class Belief_Design {
     //localize the requireJS Config
     wp_localize_script( BELIEF_THEME_SLUG.'-config-requirejs', 'the_js_reference', $js_dir );
 
-
-
     //custom app stylesheet
-    wp_enqueue_style( BELIEF_THEME_SLUG.'-custom-style', get_template_directory_uri() . '/style.css', array(), null);
-
-
-    //add requireJS script
-    // wp_localize_script( 'my-dependent', 'my_variable_reference', $my_js_dir );
-  }
+    wp_enqueue_style( BELIEF_THEME_SLUG.'-custom-style', get_template_directory_uri() . '/style.css', array(), null);  }
 
 
   /**
