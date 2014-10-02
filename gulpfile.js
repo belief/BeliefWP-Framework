@@ -16,12 +16,12 @@ var gulp = require('gulp'),
 
 // Directories
 var SRC = 'app',
-    DIST = '.';
+    DIST = 'dist';
 
 
 // SCSS Compiling and Minification
 gulp.task('scss', function(){
-  return gulp.src(SRC + '/style.scss')
+  return gulp.src(SRC + '/scss/app.scss')
     .pipe(scsslint({
       'config': '.scsslint.yml'
     }))
@@ -31,43 +31,32 @@ gulp.task('scss', function(){
         debugInfo: true,
         lineNumbers: true,
         errLogToConsole: false,
-        onSuccess: function(){
-          notify().write({ message: "SCSS Compiled successfully!" });
-        },
         onError: function(err) {
           gutil.beep();
           notify().write(err);
         }
       })
     )
-    .pipe( gulp.dest(DIST + '/') )
+    .pipe( gulp.dest(DIST + '/css/') )
     .pipe(livereload());
 });
 
-// Build JS through R.js
-gulp.task('requirejsBuild', function() {
-  rjs({
-      baseUrl: SRC + '/js/',
-      mainConfigFile: SRC + '/js/app.js',
-      paths: {
-        jquery: 'empty:',
-        _common: 'modules/_common'
-      },
-      optimize: "uglify2",
-      name: 'main',
-      out: 'main.min.js'
-  })
-  .pipe(uglify())
-  .pipe(gulp.dest(DIST + '/js'));
-});
-
-
-// Fonts
-gulp.task('fonts', function() {
-  gulp.src(SRC + '/fonts/**/*')
-  .pipe(gulp.dest(DIST + '/fonts'));
-});
-
+// // Build JS through R.js
+// gulp.task('requirejsBuild', function() {
+//   rjs({
+//       baseUrl: SRC + '/js/',
+//       mainConfigFile: SRC + '/js/app.js',
+//       paths: {
+//         jquery: 'empty:',
+//         _common: 'modules/_common'
+//       },
+//       optimize: "uglify2",
+//       name: 'main',
+//       out: 'main.min.js'
+//   })
+//   .pipe(uglify())
+//   .pipe(gulp.dest(DIST + '/js/'));
+// });
 
 // Gulp Watcher
 gulp.task('watch', function() {
@@ -75,7 +64,13 @@ gulp.task('watch', function() {
   gulp.watch(SRC + '/scss/*.scss', ['scss']);
 });
 
+// gulp.task('watchJS', function() {
+//   gulp.watch(SRC + '/js/**/*.js', ['requirejsBuild']);
+//   gulp.watch(SRC + '/js/*.js', ['requirejsBuild']);
+// });
+
+
 
 // Gulp Default Task
-gulp.task('default', ['scss', 'fonts', 'watch']);
-gulp.task('jsBuild', ['requirejsBuild']);
+gulp.task('default', ['scss', 'watch']);
+// gulp.task('jsBuild', ['requirejsBuild', 'watchJS']);

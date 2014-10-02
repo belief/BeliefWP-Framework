@@ -2,15 +2,18 @@
 /**
  * The template for displaying tagged posts
  *
+ *
  * @package WordPress
- * @subpackage BELIEF_THEME_TEMPLATE_theme
- * @since BELIEF_THEME_TEMPLATE Theme 1.0
+ * @subpackage Belief Theme
+ * @author  BeliefAgency
+ * @license GPL-2.0+
+ * @since Belief Theme Theme 1.1
  */
 
+$seo_title = single_tag_title("", false);
 get_header(); ?>
 	<main class="main blog-main clearfix">
 		<header class='blog-header'>
-			<h2><?php echo single_tag_title("", false); ?> Tagged Posts</h2>
 		</header>
 
   		<?php $vars = $wp_query->query_vars ?>
@@ -18,17 +21,13 @@ get_header(); ?>
   		
   		<?php query_posts( $vars ); ?>
 
-	  	<?php include('lib/views/blog_partial.php'); ?>
+	  	<?php include('app/views/partials/_blog.php'); ?>
 
 	  	<?php if ( !have_posts()) { ?>
-	  	<article>
-	  		No Posts with that tag
-	  	</article>
+		  	<article>
+		  		No Posts with that tag
+		  	</article>
 	  	<?php } ?>
 	</main><!-- #content -->
-	<div class="more-post-wrapper">
-		<a id="load-more-posts" class="posts-more-to-load" href="javascript:void(0);">Load More Posts</a>
-	</div>
 
-<?php
-get_footer('blog');
+<?php get_footer('blog');

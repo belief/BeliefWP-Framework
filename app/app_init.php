@@ -8,134 +8,78 @@
    *
    *
    * @package WordPress
-   * @subpackage BELIEF_THEME_TEMPLATE
+   * @subpackage Belief Theme
    * @author  BeliefAgency
    * @license GPL-2.0+
-   * @since BELIEF_THEME_TEMPLATE Theme 1.0
+   * @since Belief Theme Theme 1.1
    */
-class Belief_Theme_Classes_Design {
-  var $instance;
 
-  function __construct() {
+
+class Belief_Design {
+  public $instance;
+
+  public function __construct() {
     $this->instance =& $this;
+    //initialize the theme structure
     add_action( 'init', array( $this, 'initialize' ) );
+
+    //setup enqueue scripts
+    add_action( 'wp_enqueue_scripts', array($this,'belief_scripts') );
+
+
+    if (! function_exists('belief_setup')) {
+      add_action( 'after_setup_theme', array($this, 'belief_setup') );
+    }
+
+    //filters for excerpt
+    add_filter('the_excerpt', 'belief_excerpt');
+    add_filter('excerpt_more', 'belief_excerpt_more');
+    add_filter('excerpt_length', 'belief_excerpt_length');
   }
 
-  function initialize() {
+  public function initialize() {
     //initialize constants
-    add_action( 'belief_theme_slug_init', array( $this, 'belief_theme_slug_constants') );
+    add_action( 'belief_init', array( $this, 'belief_constants') );
 
     //initialize frameworks
-    add_action('belief_theme_slug_init', array( $this, 'belief_theme_slug_load_framework') );
+    add_action('belief_init', array( $this, 'belief_framework') );
 
     // initialize custom post types
-    add_action( 'belief_theme_slug_init', array( $this, 'sliders_post_type' ) );
+    add_action( 'belief_init', array( $this, 'form_post_type' ) );
 
-    //metaboxes
-    add_action( 'belief_theme_slug_init', array( $this, 'be_initialize_cmb_meta_boxes') );
+    //metaboxe module addon
+    add_action( 'belief_init', array( $this, 'be_initialize_cmb_meta_boxes') );
 
-    do_action('belief_theme_slug_init');
+    do_action('belief_init');
   }
 
-  function belief_theme_slug_constants() {
-    //directory location constants
-    define( 'PARENT_DIR', get_template_directory() );
-    define( 'belief_theme_slug_LIB_DIR', PARENT_DIR . '/lib' );
-    define( 'belief_theme_slug_IMAGES_DIR', PARENT_DIR . '/images' );
-    define( 'belief_theme_slug_INCLUDES_DIR', PARENT_DIR . '/includes' );
-    define( 'belief_theme_slug_ADMIN_DIR', belief_theme_slug_LIB_DIR . '/admin' );
-    define( 'belief_theme_slug_CLASSES_DIR', belief_theme_slug_LIB_DIR . '/classes' );
-    define( 'belief_theme_slug_METABOX_DIR', belief_theme_slug_LIB_DIR . '/metabox' );
+  /**
+      Constants & Framework
+
+   */
+
+  public function belief_constants() {
+
+    require_once( dirname( __FILE__ ) . '/util/constants.php' );
+
   }
 
-  function belief_theme_slug_load_framework() {
+  public function belief_framework() {
     //classes
-    require_once( belief_theme_slug_CLASSES_DIR . '/anchored_nav_menu.php' );
-    require_once( belief_theme_slug_CLASSES_DIR . '/belief_theme_slug_nav_menu.php' );
+    require_once( BELIEF_ADMIN_DIR . '/belief_nav_menu.php' );
   }
 
   /**
-   * Register Sliders Post Type
-   * @link http://codex.wordpress.org/Function_Reference/register_post_type
-   * @since 1.0
+      Register Post Types
+
    */
-  function sliders_post_type() {
-    $labels = array(
-      'name' => __( 'Sliders' ),
-      'singular_name' => __( 'Sliders' ),
-      'add_new' => __( 'Add New' ),
-      'add_new_item' => __( 'Add New Slider' ),
-      'edit_item' => __( 'Edit Slider' ),
-      'new_item' => __( 'New Slider' ),
-      'view_item' => __( 'View Slider' ),
-      'search_items' => __( 'Search Sliders' ),
-      'not_found' =>  __( 'No Sliders found' ),
-      'not_found_in_trash' => __( 'No Sliders found in trash' ),
-      'menu_name' => __( 'Sliders' ),
-    );
-
-    $args = array(
-      'labels' => $labels,
-      'public' => true,
-      'publicly_queryable' => true,
-      'show_ui' => true,
-      'show_in_menu' => true,
-      'query_var' => true,
-      'rewrite' => array( 'slug' => 'sliders' ),
-      'capability_type' => 'post',
-      'has_archive' => false,
-      'hierarchical' => false,
-      'menu_position' => 5,
-      'supports' => array('title','editor', 'thumbnail', 'page-attributes')
-    );
-
-    register_post_type( 'belief_theme_slug_sliders', $args );
-  }
-
-  /**
-   * Register Staff Post Type
-   * @link http://codex.wordpress.org/Function_Reference/register_post_type
-   * @since 1.0
-   */
-  function staff_post_type() {
-    $labels = array(
-      'name' => __( 'Staff' ),
-      'singular_name' => __( 'Staff' ),
-      'add_new' => __( 'Add New' ),
-      'add_new_item' => __( 'Add New Staff' ),
-      'edit_item' => __( 'Edit Staff' ),
-      'new_item' => __( 'New Staff' ),
-      'view_item' => __( 'View Staff' ),
-      'search_items' => __( 'Search Staff' ),
-      'not_found' =>  __( 'No Staff found' ),
-      'not_found_in_trash' => __( 'No Staff found in trash' ),
-      'menu_name' => __( 'Staff' ),
-    );
-
-    $args = array(
-      'labels' => $labels,
-      'public' => true,
-      'publicly_queryable' => true,
-      'show_ui' => true,
-      'show_in_menu' => true,
-      'query_var' => true,
-      'rewrite' => array( 'slug' => 'staff' ),
-      'capability_type' => 'post',
-      'has_archive' => false,
-      'hierarchical' => false,
-      'menu_position' => 6,
-      'supports' => array('title', 'page-attributes')
-    );
-
-    register_post_type( 'belief_theme_slug_staff', $args );
-  }
 
   /**
    * Register Custom Form Post Type
    * @link http://codex.wordpress.org/Function_Reference/register_post_type
    * @since 1.0
    */
-  function form_post_type() {
+  public function form_post_type() {
     $labels = array(
       'name' => __( 'Form Pages' ),
       'singular_name' => __( 'Form Page' ),
@@ -157,15 +101,15 @@ class Belief_Theme_Classes_Design {
       'show_ui' => true,
       'show_in_menu' => true,
       'query_var' => true,
-      'rewrite' => array( 'slug' => 'form_pages' ),
+      'rewrite' => array( 'slug' => 'form' ),
       'capability_type' => 'post',
-      'has_archive' => false,
+      'has_archive' => true,
       'hierarchical' => false,
       'menu_position' => 5,
       'supports' => array('title','page-attributes')
     );
 
-    register_post_type( 'belief_theme_slug_form_pages', $args );
+    register_post_type( 'belief_form_pages', $args );
   }
 
   /**
@@ -173,11 +117,84 @@ class Belief_Theme_Classes_Design {
    * see /lib/metabox/example-functions.php for more information
    *
    */
-  function be_initialize_cmb_meta_boxes() {
+  public function be_initialize_cmb_meta_boxes() {
       if ( !class_exists( 'cmb_Meta_Box' ) ) {
-        require_once( belief_theme_slug_METABOX_DIR . '/init.php');
+        require_once( BELIEF_METABOX_DIR . '/init.php');
       }
   }
 
+  /**
+      Scripts
+
+   */
+
+  //register scripts
+  public function belief_scripts() {
+
+    //app stylesheet
+    wp_enqueue_style( BELIEF_THEME_SLUG.'-app-style', get_template_directory_uri() . '/dist/css/app.css', array(), null);
+
+      //add requireJ
+    wp_enqueue_script( BELIEF_THEME_SLUG.'-require-js', get_template_directory_uri() . '/app/js/vendor/require.js', array(), null);
+
+    $js_dir = array(
+        'path' => get_stylesheet_directory_uri() . '/app/js/'
+    );
+
+      //add requireJS Config
+    wp_enqueue_script( BELIEF_THEME_SLUG.'-config-requirejs', get_template_directory_uri() . '/app/js/app.js', array(), null);
+
+    //localize the requireJS Config
+    wp_localize_script( BELIEF_THEME_SLUG.'-config-requirejs', 'the_js_reference', $js_dir );
+
+
+
+    //custom app stylesheet
+    wp_enqueue_style( BELIEF_THEME_SLUG.'-custom-style', get_template_directory_uri() . '/style.css', array(), null);
+
+
+    //add requireJS script
+    // wp_localize_script( 'my-dependent', 'my_variable_reference', $my_js_dir );
+  }
+
+
+  /**
+      Other
+
+   */
+  function belief_setup() {
+
+    //enable post thumbnails
+    add_theme_support( 'post-thumbnails' );
+    set_post_thumbnail_size( 672, 372, true );
+
+    //register primary menu
+    register_nav_menus( array(
+      'primary' => __( 'Top Primary Menu', 'belief_theme_slug' ),
+    ) );
+  }
+
+
+  /**
+   * Excerpt
+   * @link http://codex.wordpress.org/Function_Reference/the_excerpt
+   *
+   */
+  function belief_excerpt($output) {
+    global $post;
+    return "<p>".$output."</p>";
+  }
+
+  function belief_excerpt_more( $more ) {
+    return ' ...';
+  }
+
+  function belief_excerpt_length($length) {
+    return 100; // Or whatever you want the length to be.
+  }
 }
-new belief_theme_slug_Design;
+
+new Belief_Design;
+
+require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );
+require_once( dirname( __FILE__ )  . '/admin/belief_metaboxes_controller.php' );

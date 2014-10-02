@@ -1,0 +1,697 @@
+<?php 
+
+/**
+ *  Metabox Template Class
+ *  static class containing easy access to templates of form elements for the metabox
+ */
+class Form_Metabox_Templates {
+
+	/**
+	 * Creates the metabox view for sections and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function sectionTemplate( $rowID = 'form-section-template', $counter = "", $data = array("desc" => "") ) { 
+		$id = "";
+		$hideClass = "";
+		if ( $rowID === "form-section-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$counter = "";
+			$id = 'data-id="kfp_section-desc'.$counter.'"';
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = 'id="kfp_section-desc'.$counter.'"';
+		}
+		?>
+		<!-- Section Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Section  </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_section-desc<?php echo $counter; ?>">
+								Title:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["desc"] !== "") ? 'value="'.$data["desc"].'"' : ''; ?>
+							<input <?php echo $id; ?> type="text" class="regular-text storable" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Description</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- End Section Template -->
+	<?php }
+
+	/**
+	 * Creates the metabox view for descriptions and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function descriptionTemplate( $rowID = 'form-desc-template', $counter = "", $data = array("desc" => "") ) { 
+		$id = "";
+		$hideClass = "";
+		if ( $rowID === "form-desc-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = 'data-id="kfp_description-desc'.$counter.'"';
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = 'id="kfp_description-desc'.$counter.'"';
+		}
+		?>
+		<!-- Description Text Template -->
+			<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+				<td>
+					<h2><a class="del_element">x</a> Description Text</h2>
+					<table class="form-table sub-table">
+						<tr>
+							<th style="width:18%">
+								<label class="label" for="kfp_description-desc<?php echo $counter; ?>">
+									Text: 
+								</label>
+							</th>
+							<td>
+								<textarea <?php echo $id; ?> rows="5" class="storable"><?php echo $data['desc']; ?></textarea>
+								<p class="cmb_metabox_description">On page larger description text</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- End Description Text Template -->
+	<?php }
+
+	/**
+	 * Creates the metabox view for text inputs and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function textInputTemplate( $rowID = 'form-text-template', $counter = "", $data = array("title" => "", "type" => "", "desc" => "", "required" => "", "default" => "") ) { 
+		$id = "";
+		$id2 = "";
+		$id3 = "";
+		$hideClass = "";
+		if ( $rowID === "form-text-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = "data-id='kfp_text-title".$counter."'";
+			$id2 = "data-id='kfp_text-type".$counter."'";
+			$id3 = "data-id='kfp_text-desc".$counter."'";
+			$id4 = 'data-id="kfp_text-required'.$counter.'"';
+			$id5 = 'data-id="kfp_default-required'.$counter.'"';
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = "id='kfp_text-title".$counter."'";
+			$id2 = "id='kfp_text-type".$counter."'";
+			$id3 = "id='kfp_text-desc".$counter."'";
+			$id4 = 'id="kfp_text-required'.$counter.'"';
+			$id5 = 'id="kfp_text-default'.$counter.'"';
+		}
+		?>
+		<!-- Text Input Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Element: Text Input </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_text-required<?php echo $counter; ?>">
+								Required?
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id4; ?> type="checkbox" class="regular-checkbox storable" >
+							<script>
+								<?php if ($data["required"]) { ?>
+									jQuery('#<?php echo 'kfp_text-required'.$counter; ?>').prop('checked', true);
+
+								<?php } ?>
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_text-title<?php echo $counter; ?>">
+								Title:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["title"] !== "") ? 'value="'.$data["title"].'"' : ''; ?>
+							<input <?php echo $id; ?>  type="text" class="half storable" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Title of Text Form Element</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_text-title<?php echo $counter; ?>">
+								Default:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["default"] !== "") ? 'value="'.$data["default"].'"' : ''; ?>
+							<input <?php echo $id5; ?>  type="text" class="storable" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Default Text Inside Input Element</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_text-type<?php echo $counter; ?>">
+								Validation:
+							</label>
+						</th>
+						<td>
+							<select <?php echo $id2; ?> class="storable" >
+								<option value='' <?php if ($data['type'] === '') { echo 'selected="selected"'; } ?>>- None -</option>
+								<option value='phone' <?php if ($data['type'] === 'phone') { echo 'selected="selected"'; } ?>>Phone Number</option>
+								<option value='email' <?php if ($data['type'] === 'email') { echo 'selected="selected"'; } ?>>Email Address</option>
+							</select>
+							<p class="cmb_metabox_description">Select if needs special validation</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_text-desc<?php echo $counter; ?>">
+								Description:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["desc"] !== "") ? 'value="'.$data["desc"].'"' : ''; ?>
+							<input <?php echo $id3; ?>  type="text" class="storable" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Description for Input</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- End Text Input Template -->
+
+	<?php }
+
+
+	/**
+	 * Creates the metabox view for textarea and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function textareaInputTemplate( $rowID = 'form-textarea-template', $counter = "", $data = array("title" => "", "desc" => "", "required" => "", "default" => "") ) { 
+		$id = "";
+		$id2 = "";
+		$hideClass = "";
+		if ( $rowID === "form-textarea-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = "data-id='kfp_textarea-title".$counter."'";
+			$id2 = "data-id='kfp_textarea-desc".$counter."'";
+			$id3 = 'data-id="kfp_textarea-required'.$counter.'"';
+			$id4 = 'data-id="kfp_textarea-default'.$counter.'"';
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = "id='kfp_textarea-title".$counter."'";
+			$id2 = "id='kfp_textarea-desc".$counter."'";
+			$id3 = 'id="kfp_textarea-required'.$counter.'"';
+			$id4 = 'id="kfp_textarea-default'.$counter.'"';
+		}
+		?>
+		<!-- Text Input Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Element: Textarea Input </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_textarea-required<?php echo $counter; ?>">
+								Required?
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id3; ?> type="checkbox" class="regular-checkbox storable" >
+							<script>
+								<?php if ($data["required"]) { ?>
+									jQuery('#<?php echo 'kfp_textarea-required'.$counter; ?>').prop('checked', true);
+
+								<?php } ?>
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_textarea-title<?php echo $counter; ?>">
+								Title:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["title"] !== "") ? 'value="'.$data["title"].'"' : ''; ?>
+							<input <?php echo $id; ?> type="text" class="storable" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Title of Textarea Form Element</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_text-title<?php echo $counter; ?>">
+								Default:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["default"] !== "") ? 'value="'.$data["default"].'"' : ''; ?>
+							<input <?php echo $id4; ?>  type="text" class="storable" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Default Text Inside Input Element</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_textarea-desc<?php echo $counter; ?>">
+								Description:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["desc"] !== "") ? 'value="'.$data["desc"].'"' : ''; ?>
+							<input <?php echo $id2; ?> type="text" class="storable" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Description for Text Area</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- End Text Input Template -->
+
+	<?php }
+
+	/**
+	 * Creates the metabox view for upload input and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function uploadInputTemplate( $rowID = 'form-upload-template', $counter = "", $data = array("desc" => "") ) { 
+		$id = "";
+		$hideClass = "";
+		if ( $rowID === "form-upload-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = "data-id='kfp_upload-desc" . $counter . "'";
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = "id='kfp_upload-desc".$counter."'";
+		}
+		?>
+		<!-- Upload Input Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Element: Upload </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_upload-desc<?php echo $counter; ?>">
+								Description
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id; ?> type="text" class="storable" value="<?php echo $data['desc']; ?>">
+							<p class="cmb_metabox_description">Description for Input</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- Upload Text Input Template -->
+
+	<?php }
+
+	/**
+	 * Creates the metabox view for multiple inputs and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function uploadUnlimitedInputTemplate( $rowID = 'form-upload-unlimited-template', $counter = "", $data = array("desc" => "") ) { 
+		$id = "";
+		$hideClass = "";
+		if ( $rowID === "form-upload-unlimited-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = "data-id='kfp_upload_unlimited-desc" . $counter . "'";
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = "id='kfp_upload_unlimited-desc".$counter."'";
+		}
+		?>
+		<!-- Upload Input Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Element: Unlimited User Uploads </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_upload_unlimited-desc<?php echo $counter; ?>">
+								Description
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id; ?> type="text" class="storable" value="<?php echo $data['desc']; ?>">
+							<p class="cmb_metabox_description">Description for Input</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- Upload Text Input Template -->
+
+	<?php }
+
+
+	/**
+	 * Creates the metabox view for radio inputs and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function radioInputTemplate( $rowID = 'form-radio-template', $counter = "", $data = array("title" => "", "items" => "", "required" => "") ) { 
+		$id = "";
+		$id2 = "";
+		$hideClass = "";
+		if ( $rowID === "form-radio-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = "data-id='kfp_radios-title".$counter."'";
+			$id2 = "data-id='kfp_radios-items".$counter."'";
+			$id3 = 'data-id="kfp_radios-required'.$counter.'"';
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = "id='kfp_radios-title".$counter."'";
+			$id2 = "id='kfp_radios-items".$counter."'";
+			$id3 = 'id="kfp_radios-required'.$counter.'"';
+		}
+		?>
+		<!-- Radio Input Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Element: Radio </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_radios-required<?php echo $counter; ?>">
+								Required?
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id3; ?> type="checkbox" class="regular-checkbox storable" >
+							<script>
+								<?php if ($data["required"]) { ?>
+									jQuery('#<?php echo 'kfp_radios-required'.$counter; ?>').prop('checked', true);
+
+								<?php } ?>
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_radios-title<?php echo $counter; ?>">
+								Title:
+							</label>
+						</th>
+						<td>
+							<?php $value =  ( $data["title"] !== "") ? 'value="'.$data["title"].'"' : ''; ?>
+							<input <?php echo $id; ?> type="text" class="half storable" data-loc="kfp_radios-title<?php echo $counter; ?>" <?php echo $value; ?>>
+							<p class="cmb_metabox_description">Title of Radio Form Element</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<span class="label"> 
+								Radio Options:
+							</span>
+						</th>
+						<td>
+							<div class="element-list" data-loc="kfp_radios-items<?php echo $counter; ?>">
+								<?php if ( $data['items'] != "" && count($data['items']) > 0 ) { ?>
+									<?php 
+										$itemsArray = explode(',',$data['items']);
+										foreach ($itemsArray as &$item) {
+											echo '<span class="inner-option">' . $item . '<a>x</a></span>';
+										}
+									?>
+								<?php } else { ?>
+									None
+								<?php } ?>
+							</div>
+							<input <?php echo $id2; ?> type="hidden" class="storable" value="<?php echo $data['items']; ?>">
+							<input type="text" class="half element-input"> <button class="button" id="kfp_radios_add">Add Option</button>
+							<p class="cmb_metabox_description">To add images to options, you must click refresh</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<span class="label"> 
+								Option Images:
+								<br /><br />
+								<input id="kfp_radios_refresh_for_images" type="button" class="button" value="Refresh" data-ref="kfp_radios-items<?php echo $counter; ?>">
+							</span>
+						</th>
+						<td class="option-images">
+							<?php 
+								foreach( $itemsArray as &$item ) {
+									$elementTag = str_replace(" ","",$item);
+									$elementTag = str_replace("-","",$elementTag);
+									$elementID = 'kfp_radios-' . $elementTag . $counter;
+									$mediaButtonID = 'kfp_radios-' . $elementTag . '_button' . $counter;
+									?>
+									<div id="<?php echo $elementTag; ?>">
+									<h3 class="option-name"><?php echo $item; ?>:</h3>
+
+									<?php $value =  ( $data[$elementTag] !== "") ? 'value="'.$data[$elementTag].'"' : ''; ?>
+									<input id="<?php echo $elementID; ?>" type="text" class="half storable" <?php echo $value; ?>>
+									<input data-rel="<?php echo $elementID; ?>" type="button" class="button <?php echo $mediaButtonID; ?>" value="Add Image">
+									</div>
+									<?php
+								} 
+							?>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- Radio Text Input Template -->
+	<?php }
+
+	/**
+	 * Creates the metabox view for checkbox inputs and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function checkboxInputTemplate( $rowID = 'form-check-template', $counter = "", $data = array("title" => "", "items" => "", "required" => "") ) { 
+		$id = "";
+		$id2 = "";
+		$hideClass = "";
+		if ( $rowID === "form-check-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = "data-id='kfp_checkboxes-title".$counter."'";
+			$id2 = "data-id='kfp_checkboxes-items".$counter."'";
+			$id3 = 'data-id="kfp_checkboxes-required'.$counter.'"';
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = "id='kfp_checkboxes-title".$counter."'";
+			$id2 = "id='kfp_checkboxes-items".$counter."'";
+			$id3 = 'id="kfp_checkboxes-required'.$counter.'"';
+		}
+		?>
+		<!-- Checkbox Input Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Element: Checkboxes </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_checkboxes-required<?php echo $counter; ?>">
+								Required?
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id3; ?> type="checkbox" class="regular-checkbox storable" >
+							<script>
+								<?php if ($data["required"]) { ?>
+									jQuery('#<?php echo 'kfp_checkboxes-required'.$counter; ?>').prop('checked', true);
+
+								<?php } ?>
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_checkboxes-title<?php echo $counter; ?>">
+								Title:
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id; ?> type="text" class="half storable" data-loc="kfp_checkboxes-title<?php echo $counter; ?>" value="<?php echo $data['title']; ?>">
+							<p class="cmb_metabox_description">Title of Radio Form Element</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<span class="label"> 
+								Checkboxes:
+							</span>
+						</th>
+						<td>
+							<div class="element-list" data-loc="kfp_checkboxes-items<?php echo $counter; ?>">
+								<?php if ( $data['items'] != "" && count($data['items']) > 0 ) { ?>
+									<?php 
+										$itemsArray = explode(',',$data['items']);
+										foreach ($itemsArray as &$item) {
+											echo '<span class="inner-option">' . $item . '<a>x</a></span>';
+										}
+									?>
+								<?php } else { ?>
+									None
+								<?php } ?>
+							</div>
+							<input <?php echo $id2; ?> type="hidden" class="storable" value="<?php echo $data['items']; ?>">
+							<input type="text" class="half element-input"> <button class="button" id="kfp_checkboxes_add">Add Option</button>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<span class="label"> 
+								Option Images:
+								<br /><br />
+								<input id="kfp_checkboxes_refresh_for_images" type="button" class="button" value="Refresh" data-ref="kfp_checkboxes-items<?php echo $counter; ?>">
+							</span>
+						</th>
+						<td class="option-images">
+							<?php 
+								foreach( $itemsArray as &$item ) {
+									$elementTag = str_replace(" ","",$item);
+									$elementID = 'kfp_checkboxes-' . $elementTag . $counter;
+									$mediaButtonID = 'kfp_checkboxes-' . $elementTag . '_button' . $counter;
+									?>
+									<div id="<?php echo $elementTag; ?>">
+									<h3 class="option-name"><?php echo $item; ?>:</h3>
+									<input id="<?php echo $elementID; ?>" type="text" class="half storable" value="<?php echo $data[$elementTag]; ?>">
+									<input data-rel="<?php echo $elementID; ?>" type="button" class="button <?php echo $mediaButtonID; ?>" value="Add Image">
+									</div>
+									<?php
+								} 
+							?>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- Checkbox Text Input Template -->
+
+	<?php }
+
+
+	/**
+	 * Creates the metabox view for select inputs and prints out to html
+	 * @param  String $rowID   HTML id of row
+	 * @param  String $counter String/Integer of index
+	 * @param  array  $data    data array
+	 * @return nil     
+	 */
+	public static function selectInputTemplate( $rowID = 'form-select-template', $counter = "", $data = array("title" => "", "items" => "", "required" => "") ) { 
+		$id = "";
+		$id2 = "";
+		$hideClass = "";
+		if ( $rowID === "form-select-template") {
+			$rowID = 'id="' . $rowID . '"';
+			$id = "data-id='kfp_select-title".$counter."'";
+			$id2 = "data-id='kfp_select-items".$counter."'";
+			$id3 = 'data-id="kfp_select-required'.$counter.'"';
+			$counter = "";
+			$hideClass = "hide-template";
+		} else {
+			$rowID = 'id="' . $rowID . $counter . '"';
+			$id = "id='kfp_select-title".$counter."'";
+			$id2 = "id='kfp_select-items".$counter."'";
+			$id3 = 'id="kfp_select-required'.$counter.'"';
+		}
+		?>
+		<!-- Checkbox Input Template -->
+		<tr <?php echo $rowID; ?> class="cnb-type-text cmb_id_custom <?php echo $hideClass; ?>">
+			<td>
+				<h2><a class="del_element">x</a> Element: Dropdown </h2>
+				<table class="form-table sub-table">
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_select-required<?php echo $counter; ?>">
+								Required?
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id3; ?> type="checkbox" class="regular-checkbox storable" >
+							<script>
+								<?php if ($data["required"]) { ?>
+									jQuery('#<?php echo 'kfp_select-required'.$counter; ?>').prop('checked', true);
+
+								<?php } ?>
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<label class="label" for="kfp_select-title<?php echo $counter; ?>">
+								Title:
+							</label>
+						</th>
+						<td>
+							<input <?php echo $id; ?> type="text" class="half storable" data-loc="kfp_select-title<?php echo $counter; ?>" value="<?php echo $data['title']; ?>">
+							<p class="cmb_metabox_description">Title of Dropdown Element</p>
+						</td>
+					</tr>
+					<tr>
+						<th style="width:18%">
+							<span class="label"> 
+								Dropdown Options:
+							</span>
+						</th>
+						<td>
+							<div class="element-list" data-loc="kfp_select-items<?php echo $counter; ?>">
+								<?php if ( $data['items'] != "" && count($data['items']) > 0 ) { ?>
+									<?php 
+										$itemsArray = explode(',',$data['items']);
+										foreach ($itemsArray as &$item) {
+											echo '<span class="inner-option">' . $item . '<a>x</a></span>';
+										}
+									?>
+								<?php } else { ?>
+									None
+								<?php } ?>
+							</div>
+							<input <?php echo $id2; ?> type="hidden" class="storable" value="<?php echo $data['items']; ?>">
+							<input type="text" class="half element-input"> <button class="button" id="kfp_select_add">Add Option</button>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- Checkbox Text Input Template -->
+
+	<?php }
+} ?>

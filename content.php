@@ -4,11 +4,16 @@
  *
  * Used for both single and index/archive/search.
  *
+ *
+ *
  * @package WordPress
- * @subpackage BELIEF_THEME_TEMPLATE_theme
- * @since BELIEF_THEME_TEMPLATE Theme 1.0
+ * @subpackage Belief Theme
+ * @author  BeliefAgency
+ * @license GPL-2.0+
+ * @since Belief Theme Theme 1.1
  */
-?>
+
+get_header(); ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
@@ -59,3 +64,5 @@
 
   <?php the_tags( '<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>' ); ?>
 </article><!-- #post-## -->
+
+<?php get_footer();

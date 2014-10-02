@@ -15,6 +15,10 @@ This is the template Theme for Wordpress by Belief. This current theme is design
 	2. npm install (sudo may be required)
 	3. gulp
 
+###App Utilities:
+	1. SCSS
+	2. Require.js
+
 ###A few frameworks to be aware of:
 
 - http://www.billerickson.net/wordpress-metaboxes/

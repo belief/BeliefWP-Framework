@@ -1,35 +1,35 @@
-//for logging purposes
-$.fn.log = function() {
-  console.log.apply(console, this);
-  return this;
-};
+"use strict";
 
-//scrolling to elements on page
-function scrollToElementID(elemID) {
-  var currentTop = 0;
-  var elem = $(elemID);
-  if (elem.length) {
-    currentTop += elem.offset().top;
-    // adjsut for scrolling navigation
-    currentTop -= 135;
-    // adjust for wordpress nav
-    if ( $('#wpadminbar').length ) {
-      currentTop += $('#wpadminbar').height();
+require.config({
+    baseUrl: the_js_reference.path,
+    paths: {
+        jquery: [
+          'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min',
+          'vendor/jquery-1.11.0.min'
+        ],
+        jqueryui: [
+          'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min',
+        ],
+        modernizr: 'vendor/modernizr',
+        fastclick: 'vendor/fastclick',
+        froogaloop: 'vendor/froogaloop',
+        history: 'vendor/history',
+        infinitescroll: 'vendor/infinitescroll',
+        isotope: 'vendor/isotope',
+        mediaelement: 'vendor/mediaelement',
+        spin: 'vendor/spin.min',
+        _common: 'modules/_common',
+        _nav: 'modules/_nav',
+        _formpages: 'modules/_formpages'
+    },
+    shim: {
+      'jquery': {
+          exports: '$'
+      },
+      'mediaelement' : ['jquery']
     }
+});
 
-  }
-  $('html, body').animate({
-      scrollTop: currentTop
-    }, 1000);
-}
-
-$(document).ready(function() {
-  $(window).resize(function() {
-    if(this.resizeTO) {
-      clearTimeout(this.resizeTO);
-    }
-    this.resizeTO = setTimeout(function() {
-      $(this).trigger('resizeEnd');
-    }, 500);
-  });
+require(['_common'], function(runMethod) {
+  runMethod.init($(window),$(document));
 });

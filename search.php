@@ -2,39 +2,21 @@
 /**
  * The template for displaying Search Results pages
  *
+ *
  * @package WordPress
- * @subpackage BELIEF_THEME_TEMPLATE_theme
- * @since BELIEF_THEME_TEMPLATE Theme 1.0
+ * @subpackage Belief Theme
+ * @author  BeliefAgency
+ * @license GPL-2.0+
+ * @since Belief Theme Theme 1.1
  */
 
 get_header(); ?>
 
-  <section id="primary" class="content-area">
-    <div id="content" class="site-content" role="main">
 
-      <?php if ( have_posts() ) : ?>
+  <main class="main main-search clearfix">
 
-      <header class="page-header">
-        <h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'kerf_theme' ), get_search_query() ); ?></h1>
-      </header><!-- .page-header -->
+    <?php include('app/views/partials/_search.php'); ?>
 
-        <?php
-          // Start the Loop.
-          while ( have_posts() ) : the_post();
+  </main><!-- #content -->
 
-            get_template_part( 'content', get_post_format() );
-
-          endwhile;
-
-        else :
-          // If no content, include the "No posts found" template.
-          get_template_part( 'content', 'none' );
-
-        endif;
-      ?>
-
-    </div><!-- #content -->
-  </section><!-- #primary -->
-
-<?php
-get_footer();
+<?php get_footer();

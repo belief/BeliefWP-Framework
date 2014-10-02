@@ -40,7 +40,7 @@ textarea {
 }
 
 body {
-    color: $dark-gray;
+    color: $default-text-color;
     font-family: "adelle-sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -48,22 +48,6 @@ body {
 
 .wrapper {
     position: relative;
-    @include calc( width, '100% - 40px');
-    margin: 0 20px;
-}
-
-.site-logo {
-    float: left;
-    width: 120px;
-    height: 52px;
-    // background-image: url('images/kerflogo.svg');
-    // background-size: contain;
-    // background-repeat: no-repeat;
-
-    @include media($small-medium) {
-        margin-left: 20px;
-        margin-top: -1px;
-    }
 }
 
 p {
@@ -85,7 +69,7 @@ h1 {
 }
 
 h2 {
-    color: $dark-gray;
+    color: $default-text-color;
     margin-bottom: 0;
     font-size: $large-font;
     font-weight: 200;
@@ -97,12 +81,12 @@ h3 {
 }
 
 a {
-    color: $kerf-red;
+    color: $default-active;
     text-decoration: underline;
     font-weight: normal;
 
     &:hover {
-        color: #000;
+        color: $default-hover;
     }
 }
 

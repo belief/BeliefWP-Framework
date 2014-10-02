@@ -1,23 +1,20 @@
 <?php
 /**
- * Template Name: Blog Homepage
+ * Template Name: 404
  *
- * The template for displaying all pages
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages and that
- * other 'pages' on your WordPress site will use a different template.
  *
  * @package WordPress
- * @subpackage BELIEF_THEME_TEMPLATE_theme
- * @since BELIEF_THEME_TEMPLATE Theme 1.0
+ * @subpackage Belief Theme
+ * @author  BeliefAgency
+ * @license GPL-2.0+
+ * @since Belief Theme Theme 1.1
  */
 
 get_header(); ?>
 
-<main class="main blog-main clearfix">
-  	<h1 style="float: center">404</h1>
- </main>
+	<main class="main clearfix">
+  		<h1 style="float: center">404</h1>
+	</main>
 
-<?php
-get_footer();
+<?php get_footer();
