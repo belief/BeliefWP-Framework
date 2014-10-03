@@ -45,9 +45,9 @@ class Belief_Admin_Init {
   }
 
   public function initialize() {
-    add_action( 'admin_menu', array( $this, BELIEF_THEME_SLUG.'_settings_api_init') );
+    add_action( 'admin_menu', array( $this, 'belief_settings_api_init') );
 
-    add_action( 'admin_init', array( $this, BELIEF_THEME_SLUG.'_initialize_theme_options' ) );
+    add_action( 'admin_init', array( $this, 'belief_initialize_theme_options' ) );
 
   }
 
@@ -103,7 +103,7 @@ class Belief_Admin_Init {
   <?php
   }
 
-  public function belief_default_input_options() {
+  public function belief_initialize_default_theme_options() {
     $defaults = array(
       'processheader' => '',
       'processdescription' => '',
@@ -120,7 +120,7 @@ class Belief_Admin_Init {
 
   public function belief_initialize_theme_options() {
     if( false == get_option( BELIEF_THEME_SLUG.'_theme_inputs_options' ) ) {
-      $this->belief_theme_slug_theme_default_input_options();
+      $this->belief_initialize_default_theme_options();
     }
 
     add_settings_section(

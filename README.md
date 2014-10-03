@@ -25,3 +25,4 @@ This is the template Theme for Wordpress by Belief. This current theme is design
 
 - http://www.billerickson.net/wordpress-metaboxes/
 - http://codex.wordpress.org/Template_Hierarchy
+- https://github.com/markdalgleish/stellar.js
