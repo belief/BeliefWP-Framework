@@ -1,7 +1,5 @@
 ##BeliefWP [![Built With Gulp](http://img.shields.io/badge/built%20with-gulp.js-red.png)](http://gulpjs.com)
 
-##General Info
-
 Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metabox Types, SCSS and RequireJS builds using Gulp Worflow.
 
 ##Features##
