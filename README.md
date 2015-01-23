@@ -1,4 +1,4 @@
-##BELIEF THEME TEMPLATE
+#BeliefWP [!Built With Gulp](http://img.shields.io/badge/built%20with-gulp.js-red.png)(http://gulpjs.com)
 
 ###General Info
 
