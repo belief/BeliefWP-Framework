@@ -33,17 +33,18 @@ Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metab
 	* Android 4.4+				...... compatible ✔
 	* Opera 15+					...... compatible ✔
 
+## Check us Out! ##
 
-###For Gulp:
+[![Follow us on Twitter](http://iod.unh.edu/Images/Twitter_follow_us.png "Follow us on Twitter")](https://twitter.com/beliefagency)
+
+##Dev Information##
+
+####For Gulp:
 	1. ensure npm is installed.
 	2. npm install (sudo may be required)
 	3. gulp
 
-###App Utilities:
-	1. SCSS
-	2. Require.js
-
-###A few frameworks to be aware of:
+####A few frameworks to be aware of:
 
 - http://www.billerickson.net/wordpress-metaboxes/
 - http://codex.wordpress.org/Template_Hierarchy
