@@ -1,16 +1,38 @@
-#BeliefWP [![Built With Gulp](http://img.shields.io/badge/built%20with-gulp.js-red.png)](http://gulpjs.com)
+##BeliefWP [![Built With Gulp](http://img.shields.io/badge/built%20with-gulp.js-red.png)](http://gulpjs.com)
 
-###General Info
+##General Info
 
-This is the template Theme for Wordpress by Belief. This current theme is designed under Wordpress version 4.0.0 There are a few vendor projects included in this template with gulp and requirejs, and for the most part the dependancies are listed through gulp, etc.
+Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metabox Types, SCSS and RequireJS builds using Gulp Worflow.
 
-###Before Install:
-1. go to your wp-config file and add a define method:
+##Features##
+* Dev folder consists of all app functionality
+* Pre-built Design
+* Use Bourbon SCSS [Bourbon.io](http://bourbon.io/)
+* Using NEAT grid layout [Neat Bourbon](http://neat.bourbon.io/)
+* requireJS Module Builds [requireJS](http://requirejs.org/)
 
-	define( 'BELIEF_THEME_SLUG', '[[Theme Slug Name Here]]');
+##Note On Compatibility##
+1. RequireJS
+	* IE 6+ .......... compatible ✔
+	* Firefox 2+ ..... compatible ✔
+	* Safari 3.2+ .... compatible ✔
+	* Chrome 3+ ...... compatible ✔
+	* Opera 10+ ...... compatible ✔
+2. [@mixin calc](http://caniuse.com/#feat=calc)
+	* IE 10+ (Mobile 10+) 		...... compatible ✔
+	* Firefox 4+ (Android 33+)  ...... compatible ✔
+	* Chrome 19+ (Android 39+) 	...... compatible ✔
+	* Safari 6+ (Mobile 6.1+)	...... compatible ✔
+	* Opera 15+ (Mobile 24+)	...... compatible ✔
+	* Android 4.4 (Partially)
+3. [CSS Viewport (VH, VW, VMIN, VMAX)](http://caniuse.com/#feat=viewport-units)
+	* IE 9 (Partially) (Mobile 10 Partially)
+	* Firefox 19+				...... compatible ✔
+	* Chrome 26+				...... compatible ✔
+	* Safari 6.1+ (Mobile 8+)	...... compatible ✔	
+	* Android 4.4+				...... compatible ✔
+	* Opera 15+					...... compatible ✔
 
-2. remove the define method in app/util/constants
-3. filter through js modules and vendors depending on scope of project.
 
 ###For Gulp:
 	1. ensure npm is installed.
@@ -25,4 +47,3 @@ This is the template Theme for Wordpress by Belief. This current theme is design
 
 - http://www.billerickson.net/wordpress-metaboxes/
 - http://codex.wordpress.org/Template_Hierarchy
-- https://github.com/markdalgleish/stellar.js
