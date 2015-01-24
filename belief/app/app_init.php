@@ -14,6 +14,7 @@
    * @since Belief Theme Theme 1.1
    */
 require_once( dirname( __FILE__ )  . '/admin/belief_metaboxes_controller.php' );
+require_once( dirname( __FILE__ )  . '/util/timber.php' );
 
 class Belief_WP {
   public $instance;
@@ -43,9 +44,6 @@ class Belief_WP {
 
     //initialize frameworks
     add_action('belief_init', array( $this, 'belief_framework') );
-
-    // initialize custom post types
-    add_action( 'belief_init', array( $this, 'form_post_type' ) );
 
     //metaboxe module addon
     add_action( 'belief_init', array( $this, 'be_initialize_cmb_meta_boxes') );
@@ -154,4 +152,3 @@ new Belief_WP;
 
 require_once( dirname( __FILE__ )  . '/classes/post_types.php' );
 require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );
-require_once( dirname( __FILE__ )  . '/util/timber.php' );

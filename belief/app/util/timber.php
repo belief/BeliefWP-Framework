@@ -10,8 +10,9 @@ used for Timber, our templating system.
 
 add_action('init', function() {
 	// Set views directory
-	if ( defined('Timber') )
-		Timber::$dirname = 'app/views';
+	if ( !defined(Timber::$dirname) ) {
+	    Timber::$dirname = 'app/views/';
+	}
 });
 
 

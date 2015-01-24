@@ -1,41 +1,17 @@
 <?php
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme and one
- * of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query,
- * e.g., it puts together the home page when no home.php file exists.
- *
- * @link http://codex.wordpress.org/Template_Hierarchy
- *
- *
- * @package WordPress
- * @subpackage Belief Theme
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.1
+/*
+ * Template Name: Network Blog Page
  */
 
-$options = get_option( 'kerf_theme_inputs_options' );
+global $num_posts;
+// Setup the context
+require_once ( get_template_directory() .'/app/util/template-context.php' );
 
-get_header(); ?>
-    <main class="main clearfix">
-        <header>
-        </header>
-        <article>
-            <header>
-            </header>
-            <section>
-            </section>
-            <section>
-                OK
-            </section>
-            <footer>
-            </footer>
-        </article>
-        <footer>
-        </footer>
-    </main> <!-- main -->
+// Customize blog queries
+$context['posts'] = Timber::get_posts('offset=1&posts_per_page='. $num_posts);
 
-<?php get_footer(); ?>
+// Paging behavior
+$context['more_articles'] = true; // TODO: total > $num_posts + 1
+
+// Render the page
+Timber::render('pages/home.twig', $context);

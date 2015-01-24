@@ -16,8 +16,8 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 
-if (file_exists( dirname( __FILE__ ) .'/local' ) && file_exists(dirname( __FILE__ ) .'local/wp-config-local.php') ) {
-	include ( dirname( __FILE__ ) .'local/wp-config-local.php' );
+if (file_exists( dirname( __FILE__ ) .'/local' ) && file_exists(dirname( __FILE__ ) .'/local/wp-config.php') ) {
+	include ( dirname( __FILE__ ) .'/local/wp-config.php' );
 } else {
 	/** The name of the database for WordPress */
 	define('DB_NAME', 'database_name_here');
