@@ -48,6 +48,9 @@ Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metab
 - http://codex.wordpress.org/Template_Hierarchy
 
 ####Create a Locall Database file: Template as follows"
+- create a local folder inside public
+- create a file inside local folder: wp-config.php
+- use the template below for local settings:
 
 ```<?php
 	/** The name of the database for WordPress */
