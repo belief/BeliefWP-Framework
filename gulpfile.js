@@ -1,3 +1,5 @@
+'use strict';
+
 // Node stuff
 var exec = require('child_process').exec,
     sys = require('sys');
@@ -23,7 +25,8 @@ var gulp = require('gulp'),
 
 // Directories
 var SRC = 'belief/',
-    DIST = 'public/';
+    DIST = 'public/wp-content/themes/beliefWP/',
+    PLUGINS = 'public/wp-content/plugins/';
 
 
 // Regular Files to Move
@@ -44,12 +47,28 @@ gulp.task('cleanViews', function(){
     .pipe(clean());
 });
 
+// clean the views directory
+gulp.task('cleanPlugins', function(){
+  return gulp.src([PLUGINS], {read:false})
+    .pipe(clean());
+});
+
 //move Templates
-gulp.task('moveTemplates', function() {
+gulp.task('moveTemplates',['cleanViews'], function() {
   gulp.src(SRC+'templates/**/*.*', { base: SRC+'templates'})
   .pipe(gulp.dest(DIST+'app/views'));
 
+  notify().write({ message: "Moved Templates!" });
 });
+
+//move Plugins
+gulp.task('movePlugins',['cleanPlugins'], function() {
+  gulp.src('dependant-plugins/**/*.*', { base: 'dependant-plugins/'})
+  .pipe(gulp.dest(PLUGINS))
+
+  notify().write({ message: "Moved Plugins!" });
+});
+
 
 //move app files
 gulp.task('move',['clean'], function(){
@@ -88,7 +107,7 @@ gulp.task('scss', function(){
 //Build JS through R.js
 gulp.task('requirejsBuild', function() {
   rjs({
-      baseUrl: SRC + 'js/',
+      baseUrl: SRC + '/js',
       mainConfigFile: SRC + '/js/app.js',
       optimize: "uglify2",
       name: 'main',
@@ -98,24 +117,30 @@ gulp.task('requirejsBuild', function() {
   .pipe(gulp.dest(DIST + 'assets/js'));
 });
 
+//notify js is compiled
 gulp.task('jsNotify', function() {
     notify().write({ message: "JS Compiled successfully!" });
 });
 
 //move vendor files
 gulp.task('movejsVendor', function() {
-  return gulp.src( SRC + '/js/vendor/*.js')
+  return gulp.src( SRC + 'js/vendor/*.js')
     .pipe(uglify())
     .pipe((gulp.dest( DIST + 'assets/js/vendor/')));
 
 });
 
 //move module files
-gulp.task('movejsVendor', function() {
-  return gulp.src( SRC + '/js/modules/*.js')
+gulp.task('movejsModules', function() {
+  return gulp.src( SRC + 'js/modules/*.js')
     .pipe(uglify())
     .pipe((gulp.dest( DIST + 'assets/js/modules/')));
 
+});
+
+//Notify initial build success
+gulp.task('buildSuccess', function() {
+    notify().write({ message: "Build was Successful!" });
 });
 
 // Gulp Watchers
@@ -125,8 +150,8 @@ gulp.task('watchSCSS', function() {
 });
 
 gulp.task('watchJS', function() {
-  gulp.watch(SRC + 'js/**/*.js', ['requirejsBuild']);
-  gulp.watch(SRC + 'js/*.js', ['requirejsBuild']);
+  gulp.watch(SRC + 'js/**/*.js', ['requirejsBuild','jsNotify']);
+  gulp.watch(SRC + 'js/*.js', ['requirejsBuild','jsNotify']);
 });
 
 gulp.task('watchMove', function() {
@@ -134,17 +159,17 @@ gulp.task('watchMove', function() {
   gulp.watch(SRC + 'static/**/*.*', ['move']);
   gulp.watch(SRC + 'static/*.*', ['move']);
   gulp.watch(SRC + 'app/*.*', ['move']);
-});
 
-gulp.task('watchTemplates', function() {
   gulp.watch(SRC + 'templates/*.*', ['moveTemplates']);
   gulp.watch(SRC + 'templates/**/*.*', ['moveTemplates']);
+
+  gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);
+  gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);
 });
 
 
 // Gulp Default Task
 gulp.task('scssBuild', ['scss', 'watchSCSS']);
-gulp.task('jsBuild', ['requirejsBuild', 'movejsVendor','movejsVendor','jsNotify','watchJS']);
-gulp.task('moveBuild', ['move', 'watchMove']);
-gulp.task('templatesBuild', ['moveTemplates', 'watchTemplates']);
-gulp.task('default', ['scssBuild', 'moveBuild','templatesBuild','jsBuild']);
+gulp.task('jsBuild', ['movejsVendor','movejsModules','requirejsBuild', 'jsNotify','watchJS']);
+gulp.task('moveBuild', ['move', 'moveTemplates', 'movePlugins', 'watchMove']);
+gulp.task('default', ['scssBuild', 'moveBuild','jsBuild','buildSuccess']);

@@ -1,0 +1,46 @@
+
+{% extends 'layout.twig' %}
+
+{% block hero %}
+<section class="container invert-text blog-title">
+    {% include '_searchform.twig' %}
+</section>
+{% endblock %}
+
+
+{% block content %}
+<section id="above-fold" class="container">
+    <article class="post post-{{ post.post_type }}" id="post-{{ post.ID }}">
+
+        {% if  post.thumbnail %}
+          <img src="{{ post.thumbnail.src('post-thumb') }}"/>
+        {% endif %}
+
+        <h1 class="h2">{{ post.title }}</h1>
+        <p class="post-meta">
+            {{ post.display_date }}
+            by {{ post.author }}
+            {% if post.category != 'Uncategorized' %}
+              in <a href="{{ post.category.url }}">{{ post.category }}</a>
+            {% endif %}
+        </p>
+        <div class="body">{{ post.content }}</div>
+
+        <section id="author" class="author-box clearfix more-gap">
+            {% if fn('has_wp_user_avatar', post.post_author) %}
+            <div class="author-avatar">{{ fn('get_wp_user_avatar', post.post_author, 'square-thumb') }}</div>
+            {% endif %}
+
+            <div class="author-bio">
+                <h4>Author: {{ post.author.name }}</h4>
+                {{ fn('the_author_meta', 'description', post.post_author) }}
+            </div>
+        </section>
+    </article>
+
+    <aside class="filter-posts">
+        {% include '_filters.twig' %}
+    </aside>
+</section>
+
+{% endblock %}

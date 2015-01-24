@@ -1,8 +1,5 @@
-"use strict";
-
 require.config({
-    // baseURL: the_js_reference.path,
-    baseUrl: 'public/assets/js',
+    baseURL: '/wp-content/themes/beliefWP/assets/js/',
     waitSeconds: 120,
     paths: {
         jquery: 'vendor/jquery-1.11.0.min',
@@ -33,7 +30,8 @@ define(['require', 'jquery', '_common', 'modernizr'], function(require, $, _comm
   var $win = $(window),
       $doc = $(document),
       moduleNames = [
-        'homepage'
+        '_common',
+        '_nav'
       ],
       moduleQueue = [];
 

@@ -1,0 +1,17 @@
+
+{% if hero_graphic and hero_phrase %}
+<section id="hero" class="container hero hero-text">
+    <p class="hero-message">{{ hero_phrase }}</p>
+</section>
+
+{% elseif hero_graphic %}
+<section id="hero" class="container hero video-thumb">
+    <div class="controls">
+      {% if hero_vimeo_id %}
+        <a href="#watch" class="btn watch">{{ watch_button_text }}</a>
+      {% endif %}
+    </div>
+</section>
+{% endif %}
+
+
