@@ -22,10 +22,12 @@ var gulp = require('gulp'),
     lr = require('tiny-lr'),
     server = lr();
 
+//theme slug
+var themeSlug = 'beliefWP';
 
 // Directories
 var SRC = 'belief/',
-    DIST = 'public/wp-content/themes/beliefWP/',
+    DIST = 'public/wp-content/themes/'+themeSlug+'/',
     PLUGINS = 'public/wp-content/plugins/';
 
 
