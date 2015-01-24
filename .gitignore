@@ -14,3 +14,7 @@ dwsync.xml
 logs/*
 .sass-cache
 node_modules
+
+# Framework Builds
+# ------------------------------------------------------------
+public/app

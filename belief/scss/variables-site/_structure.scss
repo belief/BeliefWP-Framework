@@ -1,2 +1,10 @@
 $size__site-main: 100%;
 $size__site-sidebar: 25%;
+
+// Define your breakpoints
+$x-large: new-breakpoint(min-width 1500px);
+$large: new-breakpoint(min-width 1200px);
+$medium-large: new-breakpoint(min-width 1075px);
+$medium: new-breakpoint(min-width 900px);
+$small-medium: new-breakpoint(min-width 675px);
+$small: new-breakpoint(min-width 480px);

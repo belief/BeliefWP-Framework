@@ -13,9 +13,9 @@
    * @license GPL-2.0+
    * @since Belief Theme Theme 1.1
    */
+require_once( dirname( __FILE__ )  . '/admin/belief_metaboxes_controller.php' );
 
-
-class Belief_Design {
+class Belief_WP {
   public $instance;
 
   public function __construct() {
@@ -74,43 +74,6 @@ class Belief_Design {
 
    */
 
-  /**
-   * Register Custom Form Post Type
-   * @link http://codex.wordpress.org/Function_Reference/register_post_type
-   * @since 1.0
-   */
-  public function form_post_type() {
-    $labels = array(
-      'name' => __( 'Form Pages' ),
-      'singular_name' => __( 'Form Page' ),
-      'add_new' => __( 'Add New' ),
-      'add_new_item' => __( 'Add New Form Page' ),
-      'edit_item' => __( 'Edit Form Page' ),
-      'new_item' => __( 'New Form Page' ),
-      'view_item' => __( 'View Form Page' ),
-      'search_items' => __( 'Search Form Pages' ),
-      'not_found' =>  __( 'No Form Pages found' ),
-      'not_found_in_trash' => __( 'No Form Pages found in trash' ),
-      'menu_name' => __( 'Form Pages' ),
-    );
-
-    $args = array(
-      'labels' => $labels,
-      'public' => true,
-      'publicly_queryable' => true,
-      'show_ui' => true,
-      'show_in_menu' => true,
-      'query_var' => true,
-      'rewrite' => array( 'slug' => 'form' ),
-      'capability_type' => 'post',
-      'has_archive' => true,
-      'hierarchical' => false,
-      'menu_position' => 5,
-      'supports' => array('title','page-attributes')
-    );
-
-    register_post_type( 'belief_form_pages', $args );
-  }
 
   /**
    * Initialize Metabox Class
@@ -187,7 +150,8 @@ class Belief_Design {
   }
 }
 
-new Belief_Design;
+new Belief_WP;
 
+require_once( dirname( __FILE__ )  . '/classes/post_types.php' );
 require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );
-require_once( dirname( __FILE__ )  . '/admin/belief_metaboxes_controller.php' );
+require_once( dirname( __FILE__ )  . '/util/timber.php' );

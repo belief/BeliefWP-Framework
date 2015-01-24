@@ -1,0 +1,1 @@
+define(["_nav"],function(i){var e,t,n;return{init:function(o,s){e=o,t=s,n=$("body"),i.init(e,t),FastClick.attach(n[0]),n.on("touchmove",function(i){n.hasClass("is-active")&&i.preventDefault()}),$(window).resize(function(){this.resizeTO&&clearTimeout(this.resizeTO),this.resizeTO=setTimeout(function(){$(this).trigger("resizeEnd")},200)}),console.log("common loaded")}}});

@@ -1,17 +1,41 @@
 <?php
 /**
- * Front to the WordPress application. This file doesn't do anything, but loads
- * wp-blog-header.php which does and tells WordPress to load the theme.
+ * The main template file
+ *
+ * This is the most generic template file in a WordPress theme and one
+ * of the two required files for a theme (the other being style.css).
+ * It is used to display a page when nothing more specific matches a query,
+ * e.g., it puts together the home page when no home.php file exists.
+ *
+ * @link http://codex.wordpress.org/Template_Hierarchy
+ *
  *
  * @package WordPress
+ * @subpackage Belief Theme
+ * @author  BeliefAgency
+ * @license GPL-2.0+
+ * @since Belief Theme Theme 1.1
  */
 
-/**
- * Tells WordPress to load the WordPress theme and output it.
- *
- * @var bool
- */
-define('WP_USE_THEMES', true);
+$options = get_option( 'kerf_theme_inputs_options' );
 
-/** Loads the WordPress Environment and Template */
-require( dirname( __FILE__ ) . '/wp-blog-header.php' );
+get_header(); ?>
+    <main class="main clearfix">
+        <header>
+        </header>
+        <article>
+            <header>
+            </header>
+            <section>
+            </section>
+            <section>
+                OK
+            </section>
+            <footer>
+            </footer>
+        </article>
+        <footer>
+        </footer>
+    </main> <!-- main -->
+
+<?php get_footer(); ?>
