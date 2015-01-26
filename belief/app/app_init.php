@@ -13,8 +13,6 @@
    * @license GPL-2.0+
    * @since Belief Theme Theme 1.1
    */
-require_once( dirname( __FILE__ )  . '/admin/belief_metaboxes_controller.php' );
-require_once( dirname( __FILE__ )  . '/util/timber.php' );
 
 class Belief_WP {
   public $instance;
@@ -39,8 +37,6 @@ class Belief_WP {
   }
 
   public function initialize() {
-    //initialize constants
-    add_action( 'belief_init', array( $this, 'belief_constants') );
 
     //initialize frameworks
     add_action('belief_init', array( $this, 'belief_framework') );
@@ -52,19 +48,21 @@ class Belief_WP {
   }
 
   /**
-      Constants & Framework
+      Framework
 
    */
+  public function belief_framework() {
 
-  public function belief_constants() {
 
     require_once( dirname( __FILE__ ) . '/util/constants.php' );
+    require_once( dirname( __FILE__ )  . '/admin/belief_metaboxes_controller.php' );
+    require_once( dirname( __FILE__ )  . '/util/timber.php' );
 
-  }
-
-  public function belief_framework() {
     //classes
     require_once( BELIEF_ADMIN_DIR . '/belief_nav_menu.php' );
+    require_once( dirname( __FILE__ )  . '/classes/post_types.php' );
+    require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );
+    require_once( dirname( __FILE__ )  . '/classes/settings.php' );
   }
 
   /**
@@ -150,5 +148,3 @@ class Belief_WP {
 
 new Belief_WP;
 
-require_once( dirname( __FILE__ )  . '/classes/post_types.php' );
-require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );

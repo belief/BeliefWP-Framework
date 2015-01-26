@@ -42,39 +42,12 @@ function page_url( $name ) {
 	return get_page_link( get_page_by_title( $name )->ID );
 }
 
-function network_page_url( $name ) {
-	switch_to_blog( 1 );
-	$url = page_url( $name );
-	restore_current_blog();
-	return $url;
-}
-
-// http://wordpress.org/plugins/download-shortcode/other_notes/
-// add_filter( 'fds_rewrite_urls', '__return_false' );
-/*function download_link( $url, $label ) {
-	return do_shortcode( '[download label="'. $label .'"]'. $url .'[/download]' );
-}*/
-
-function audio_player( $audio_url ) {
-	$code = '[sc_embed_player_template1 fileurl="'. $audio_url .'"]';
-	return do_shortcode( $code );
-
-}
-
 function build_link( $url, $label ) {
 	return '<a href="'. $url .'">'. $label .'</a>';
 }
 
 function page_title() {
 	return bloginfo( 'name' ) . wp_title( ' &lsaquo; ', true, 'left' );
-}
-
-function banner_url() {
-	if ( is_page() ) {
-		$image = get_sub_field( 'banner' );
-		return $image['sizes']['vibe-banner'];
-	}
-	return false;
 }
 
 function img_src( $id, $thumb_size ) {

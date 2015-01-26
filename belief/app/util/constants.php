@@ -1,10 +1,16 @@
 <?php
 
-define( 'BELIEF_THEME_SLUG', 'test_theme');
+if ( !defined('BELIEF_THEME_SLUG') ) {
+	define( 'BELIEF_THEME_SLUG', 'test_theme');
+}
 
+if ( !defined('BELIEF_THEME_SLUG_UPPERCASE') ) {
+	define( 'BELIEF_THEME_SLUG_UPPERCASE', strtoupper( BELIEF_THEME_SLUG ));
+}
 
-define( 'BELIEF_THEME_SLUG_UPPERCASE', strtoupper( BELIEF_THEME_SLUG ));
-define( 'BELIEF_THEME_TITLE', ucwords( str_replace("_"," ",BELIEF_THEME_SLUG) ) );
+if ( !defined('BELIEF_THEME_TITLE') ) {
+	define( 'BELIEF_THEME_TITLE', ucwords( str_replace("_"," ",BELIEF_THEME_SLUG) ) );
+}
 
 
 //directory location constants

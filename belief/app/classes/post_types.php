@@ -55,4 +55,6 @@ class Belief_Post_Types {
 	  register_post_type( 'belief_form_pages', $args );
 	}
 }
+
+new Belief_Post_Types;
 ?>

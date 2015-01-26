@@ -26,9 +26,6 @@ class Belief_Admin_Init {
   public function __construct() {
     $this->instance =& $this;
 
-    //initialize structure of admin
-    add_action( 'init', array( $this, 'initialize' ) );
-
     //add custom hook for image insertion
     add_filter( 'image_send_to_editor', array($this, 'html5_insert_image'), 10, 9 );
 
@@ -41,13 +38,6 @@ class Belief_Admin_Init {
     add_action('admin_menu', array($this, 'belief_redirect') );
 
     add_action('admin_init', array($this, 'belief_restrict_notice') );
-
-  }
-
-  public function initialize() {
-    add_action( 'admin_menu', array( $this, 'belief_settings_api_init') );
-
-    add_action( 'admin_init', array( $this, 'belief_initialize_theme_options' ) );
 
   }
 
@@ -74,136 +64,6 @@ class Belief_Admin_Init {
     );
   }
 
-
-
-  /**
-      Setup Theme Options
-
-  */
- 
-
-  public function belief_theme_inputs() {
-  ?>
-   <div class="wrap">
-
-     <div id="icon-themes" class="icon32"></div>
-     <h2><?php _e( BELIEF_THEME_TITLE.' Theme Options' ); ?></h2>
-     <?php settings_errors(); ?>
-
-     <form method="post" action="options.php">
-       <?php
-
-         settings_fields( BELIEF_THEME_SLUG.'_theme_inputs_options' );
-         do_settings_sections( BELIEF_THEME_SLUG.'_theme_inputs_options' );
-         submit_button();
-
-       ?>
-     </form>
-   </div>
-  <?php
-  }
-
-  public function belief_initialize_default_theme_options() {
-    $defaults = array(
-      'processheader' => '',
-      'processdescription' => '',
-      'aboutbelief_theme_slug' => '',
-      'contactbelief_theme_slug' => '',
-      'heromp4link' => '',
-      'herowebmlink' => '',
-      'belief_theme_slugaddress' => '',
-      'belief_theme_slugemail' => '',
-      'belief_theme_slugphone' => ''
-    );
-    update_option( BELIEF_THEME_SLUG.'_theme_inputs_options', $defaults );
-  }
-
-  public function belief_initialize_theme_options() {
-    if( false == get_option( BELIEF_THEME_SLUG.'_theme_inputs_options' ) ) {
-      $this->belief_initialize_default_theme_options();
-    }
-
-    add_settings_section(
-      BELIEF_THEME_SLUG.'_info_section',
-      __( 'Info'),
-      array( $this, 'belief_info_callback'),
-      BELIEF_THEME_SLUG.'_theme_inputs_options'
-    );
-
-    add_settings_field(
-      'heromp4link',
-      __( 'Hero mp4 URL' ),
-      array( $this, 'belief_hero_mp4_callback'),
-      BELIEF_THEME_SLUG.'_theme_inputs_options',
-      BELIEF_THEME_SLUG.'_info_section'
-    );
-
-    add_settings_field(
-      'herowebmlink',
-      __( 'Hero Webm URL'),
-      array( $this, 'belief_hero_webm_callback'),
-      BELIEF_THEME_SLUG.'_theme_inputs_options',
-      BELIEF_THEME_SLUG.'_info_section'
-    );
-  }
-
-  /*------------------------------------------------------------------------ *
-   * Section Callbacks
-   * ------------------------------------------------------------------------
-   */
-
-  public function belief_info_callback() {
-    echo '<p>' . __( 'Administrative settings for belief_theme_slug Design') . '</p>';
-  }
-
-  public function belief_hero_mp4_callback() {
-    $options = get_option( BELIEF_THEME_SLUG.'_theme_inputs_options' );
-    $url = '';
-    if( isset( $options['heromp4link'] ) ) {
-      $url = esc_url( $options['heromp4link'] );
-    }
-
-    echo '<input name="'.BELIEF_THEME_SLUG.'_theme_inputs_options[heromp4link]" type="text" id="heromp4link" value="' . $url . '" class="large-text code">
-        <p class="description">direct link to the mp4 video for the preview hero.</p>';
-  }
-
-  public function belief_hero_webm_callback() {
-    $options = get_option( BELIEF_THEME_SLUG.'_theme_inputs_options' );
-    $url = '';
-    if( isset( $options['herowebmlink'] ) ) {
-      $url = esc_url( $options['herowebmlink'] );
-    }
-
-    echo '<input name="'.BELIEF_THEME_SLUG.'_theme_inputs_options[herowebmlink]" type="text" id="herowebmlink" value="' . $url . '" class="large-text code">
-        <p class="description">direct link to the mp4 video for the preview hero.</p>';
-  }
-
-  /* ------------------------------------------------------------------------ *
-   * Input Validations
-   * ------------------------------------------------------------------------ */
-
-  public function belief_options_validate_inputs( $input ) {
-
-    // Create our array for storing the validated options
-    $output = array();
-
-    // Loop through each of the incoming options
-    foreach( $input as $key => $value ) {
-
-      // Check to see if the current option has a value. If so, process it.
-      if( isset( $input[$key] ) ) {
-
-        // Strip all HTML and PHP tags and properly handle quoted strings
-        $output[$key] = strip_tags( stripslashes( $input[ $key ] ) );
-
-      } // end if
-
-    } // end foreach
-
-    // Return the array processing any additional functions filtered by this action
-    return apply_filters( 'belief_theme_slug_theme_validate_inputs', $output, $input );
-
-  }
 
   /**
       Post Type Hooks
@@ -274,3 +134,4 @@ class Belief_Admin_Init {
 }
 
 new Belief_Admin_Init;
+
