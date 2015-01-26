@@ -4,7 +4,7 @@ define(['jquery'], function($) {
 
   var $win, $doc,
       $body = $('body'),
-      $main = $('.main');
+      $main = $('main');
 
   var toggleMobileMenu = function() {
     $body.toggleClass('is-active');
@@ -29,6 +29,8 @@ define(['jquery'], function($) {
       $doc = $d;
       
       addEventHandlers();
+
+      if (javascript_args.wp_debug) { console.log('nav loaded'); }
     },
 
     toggleMobileMenu: toggleMobileMenu,

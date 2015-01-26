@@ -7,15 +7,11 @@ These are settings and global variables
 used for Timber, our templating system.
 */
 
-
-add_action('init', function() {
-	// Set views directory
-	if ( !defined(Timber::$dirname) ) {
-	    Timber::$dirname = 'app/views/';
-	}
-});
-
-
+if ( !defined(Timber::$dirname) ) {
+    Timber::$dirname = 'app/views/';
+}
+/************* Includes ***************/
+require_once( dirname( __FILE__ )  . '/../classes/GTM_Data_Layer.php' );
 
 /************* VIEW HELPERS ***************/
 

@@ -5,7 +5,6 @@
 
 global $num_posts;
 // Setup the context
-require_once ( get_template_directory() .'/app/util/template-context.php' );
 
 // Customize blog queries
 $context['posts'] = Timber::get_posts('offset=1&posts_per_page='. $num_posts);

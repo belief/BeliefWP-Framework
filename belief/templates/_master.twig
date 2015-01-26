@@ -2,8 +2,8 @@
 <html {{ language_attributes }} class="no-js">
     <head>
         {% include '_partials/_meta.twig' %}
-        {% include '_partials/_tracking.twig' %}
         {{ function('wp_head') }}
+        {% include '_partials/_tracking.twig' %}
         {% block head %}
         {% endblock %}
     </head>

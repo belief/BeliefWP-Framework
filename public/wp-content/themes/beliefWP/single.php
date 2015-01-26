@@ -1,21 +1,10 @@
 <?php
-/**
- * The template for displaying a single post
- *
- *
- * @package WordPress
- * @subpackage Belief Theme
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.1
+/*
+ * Template Name: Network Blog Post Page
  */
 
-get_header(); ?>
+// Setup the context
+require_once ( get_template_directory() .'/app/util/template-context.php' );
 
-  <main class="main blog-single clearfix">
-
-    <?php include('app/views/partials/_single.php'); ?>
-
-  </main><!-- #content -->
-
-<?php get_footer( 'single' );
+// Render the page
+Timber::render('blog/single.twig', $context);

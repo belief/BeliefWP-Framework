@@ -7,11 +7,6 @@ class Belief_Post_Types {
 	public function __construct() {
 	  $this->instance =& $this;
 	  //initialize the theme structure
-	  add_action( 'init', array( $this, 'initialize' ) );
-	}
-
-	public function initialize() {
-	  // initialize custom post types
 	  add_action( 'belief_init_post_types', array( $this, 'form_post_type' ) );
 
 	  do_action('belief_init_post_types');

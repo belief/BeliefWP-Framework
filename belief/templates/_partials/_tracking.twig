@@ -1,6 +1,6 @@
 {% if settings.gtm_tracking %}
 	{{ settings.gtm_tracking }}
-{% else if settings.ga_tracking_id %}
+{% elseif settings.ga_tracking_id %}
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '{{ settings.ga_tracking_id }}']);
@@ -11,4 +11,10 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 </script>
+{% endif %}
+
+{% if post %}
+    <script>window.dataLayer = window.dataLayer || []; window.dataLayer.push({{ fn( 'GTMBasic', post ) }})</script>
+{% else %}
+    <script>window.dataLayer = window.dataLayer || []; window.dataLayer.push({{ fn( 'GTMBasic' ) }})</script>
 {% endif %}

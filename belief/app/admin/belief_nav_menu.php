@@ -6,11 +6,13 @@ class Belief_Theme_Nav_Menu extends Walker_Nav_Menu {
 
             $li_attributes = '';
             $class_names = $value = '';
+            $haschildren = false;
 
             $classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
             //Add class and attribute to LI element that contains a submenu UL.
-            if (property_exists($args,'has_children') ) {
+            if (is_object($args) && property_exists($args,'has_children')) {
+                $haschildren = true;
                 $classes[]      = 'dropdown';
                 $li_attributes .= 'data-dropdown="dropdown"';
             }
@@ -32,14 +34,16 @@ class Belief_Theme_Nav_Menu extends Walker_Nav_Menu {
             $attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target     ) .'"' : '';
             $attributes .= ! empty( $item->xfn ) ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
             $attributes .= ! empty( $item->url ) ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-            $attributes .= (property_exists($args,'has_children') ) ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
+            $attributes .= ($haschildren) ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
 
-            $item_output = $args->before;
+            $item_output = (is_object($args)) ? $args->before : '';
             $item_output .= '<a class="big-underline-nav"'. $attributes .'>';
-            $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-            $item_output .= (property_exists($args,'has_children') ) ? ' <b class="caret"></b> ' : '';
+            $item_output .= (is_object($args)) ? $args->link_before : '';
+            $item_output .= apply_filters( 'the_title', $item->title, $item->ID );
+            $item_output .= (is_object($args)) ? $args->link_after : '';
+            $item_output .= ($haschildren) ? ' <b class="caret"></b> ' : '';
             $item_output .= '</a>';
-            $item_output .= $args->after;
+            $item_output .= (is_object($args)) ? $args->after : '';
 
             $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
         }

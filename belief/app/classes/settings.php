@@ -7,16 +7,36 @@ class Belief_Settings {
 		//initialize the theme structure
 		//
 		if ( is_admin() ):
-			add_action( 'init', array( $this, 'initialize' ) );
+			add_action( 'admin_menu', array( $this, 'belief_settings_api_init') );
+
+			add_action( 'admin_init', array( $this, 'belief_initialize_theme_options' ) );
+
 		endif;
 	}
 
-	public function initialize() {
-	  add_action( 'admin_menu', array( $this, 'belief_settings_api_init') );
+	/**
+	    Dashboard Menu
 
-	  add_action( 'admin_init', array( $this, 'belief_initialize_theme_options' ) );
+	*/
 
+	public function belief_settings_api_init() {
+	  add_theme_page(
+	    'Edit ' . BELIEF_THEME_TITLE .' Theme',          // The title to be displayed in the browser window for this page.
+	    BELIEF_THEME_TITLE.' Theme',          // The text to be displayed for this menu item
+	    'administrator',          // Which type of users can see this menu item
+	    BELIEF_THEME_SLUG.'_theme_options',      // The unique ID - that is, the slug - for this menu item
+	    array( $this, BELIEF_THEME_SLUG.'_theme_inputs')       // The name of the function to call when rendering this menu's page
+	  );
+
+	  add_menu_page(
+	    'Edit ' . BELIEF_THEME_TITLE .' Theme',          // The value used to populate the browser's title bar when the menu page is active
+	    BELIEF_THEME_TITLE.' Theme',          // The text of the menu in the administrator's sidebar
+	    'administrator',          // What roles are able to access the menu
+	    BELIEF_THEME_SLUG.'_theme_menu',       // The ID used to bind submenu items to this menu
+	    array( $this, 'belief_theme_inputs')       // The callback function used to render this menu
+	  );
 	}
+
 
 	/**
 	    Setup Theme Options
@@ -197,7 +217,7 @@ class Belief_Settings {
 	  add_settings_field(
 	    'linkedin_url',
 	    __( 'LinkedIn URL'),
-	    array( $this, 'belief_linked_url_callback'),
+	    array( $this, 'belief_linkedin_url_callback'),
 	    BELIEF_THEME_SLUG.'_theme_inputs_options',
 	    BELIEF_THEME_SLUG.'_social_section'
 	  );

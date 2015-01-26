@@ -97,4 +97,5 @@ Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metab
 	 * in their development environments.
 	 */
 	define('WP_DEBUG', true);
+	define( 'BELIEF_THEME_SLUG', 'framework_test'); //optional to have slug defined
 ```

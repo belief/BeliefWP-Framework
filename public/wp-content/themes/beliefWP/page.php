@@ -1,39 +1,27 @@
 <?php
 /**
- * The template for displaying all pages
+ * The template for displaying all pages.
  *
  * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages and that
- * other 'pages' on your WordPress site will use a different template.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
  *
+ * To generate specific templates for your pages you can use:
+ * /mytheme/views/page-mypage.twig
+ * (which will still route through this PHP file)
+ * OR
+ * /mytheme/page-mypage.php
+ * (in which case you'll want to duplicate this file and save to the above path)
  *
- * @package WordPress
- * @subpackage Belief Theme
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.1
+ * Methods for TimberHelper can be found in the /functions sub-directory
+ *
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
  */
 
-get_header(); ?>
-
-<div id="primary" class="content-area">
-  <div id="content" class="site-content" role="main">
-
-    <?php
-      // Start the Loop.
-      while ( have_posts() ) : the_post();
-
-        // Include the page content template.
-        get_template_part( 'content', 'page' );
-
-        // If comments are open or we have at least one comment, load up the comment template.
-        if ( comments_open() || get_comments_number() ) {
-          comments_template();
-        }
-      endwhile;
-    ?>
-
-  </div><!-- #content -->
-</div><!-- #primary -->
-
-<?php get_footer();
+$context = Timber::get_context();
+$post = new TimberPost();
+$context['post'] = $post;
+Timber::render(array('page-' . $post->post_name . '.twig', 'page.twig'), $context);

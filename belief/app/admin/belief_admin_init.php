@@ -42,30 +42,6 @@ class Belief_Admin_Init {
   }
 
   /**
-      Dashboard Menu
-
-  */
-
-  public function belief_settings_api_init() {
-    add_theme_page(
-      'Edit ' . BELIEF_THEME_TITLE .' Theme',          // The title to be displayed in the browser window for this page.
-      BELIEF_THEME_TITLE.' Theme',          // The text to be displayed for this menu item
-      'administrator',          // Which type of users can see this menu item
-      BELIEF_THEME_SLUG.'_theme_options',      // The unique ID - that is, the slug - for this menu item
-      array( $this, BELIEF_THEME_SLUG.'_theme_inputs')       // The name of the function to call when rendering this menu's page
-    );
-
-    add_menu_page(
-      'Edit ' . BELIEF_THEME_TITLE .' Theme',          // The value used to populate the browser's title bar when the menu page is active
-      BELIEF_THEME_TITLE.' Theme',          // The text of the menu in the administrator's sidebar
-      'administrator',          // What roles are able to access the menu
-      BELIEF_THEME_SLUG.'_theme_menu',       // The ID used to bind submenu items to this menu
-      array( $this, BELIEF_THEME_SLUG.'_theme_inputs')       // The callback function used to render this menu
-    );
-  }
-
-
-  /**
       Post Type Hooks
 
   */
@@ -108,8 +84,10 @@ class Belief_Admin_Init {
 
   public function belief_menu_mod() {
     global $submenu;
-    unset($submenu['edit.php?post_type=page'][10]);
-    $submenu['edit.php?post_type=page'][10][1] = 'publish_pages';
+    if ( count($submenu['edit.php?post_type=page']) > 10 ) {
+      unset($submenu['edit.php?post_type=page'][10]);
+      $submenu['edit.php?post_type=page'][10][1] = 'publish_pages';
+    }
   }
 
   public function belief_hide_add_button() {

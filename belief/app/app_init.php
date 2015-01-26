@@ -61,7 +61,6 @@ class Belief_WP {
     //classes
     require_once( BELIEF_ADMIN_DIR . '/belief_nav_menu.php' );
     require_once( dirname( __FILE__ )  . '/classes/post_types.php' );
-    require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );
     require_once( dirname( __FILE__ )  . '/classes/settings.php' );
   }
 
@@ -91,20 +90,20 @@ class Belief_WP {
   public function belief_scripts() {
 
     //app stylesheet
-    wp_enqueue_style( BELIEF_THEME_SLUG.'-app-style', get_template_directory_uri() . '/dist/css/app.css', array(), null);
+    wp_enqueue_style( BELIEF_THEME_SLUG.'-app-style', get_template_directory_uri() . '/assets/css/app.min.css', array(), null);
 
       //add requireJ
-    wp_enqueue_script( BELIEF_THEME_SLUG.'-require-js', get_template_directory_uri() . '/app/js/vendor/require.js', array(), null);
+    wp_enqueue_script( BELIEF_THEME_SLUG.'-require-js', get_template_directory_uri() . '/assets/js/vendor/require.js', array(), null);
 
-    $js_dir = array(
-        'path' => get_stylesheet_directory_uri() . '/app/js/'
+    $args = array(
+        'wp_debug' => WP_DEBUG
     );
 
       //add requireJS Config
-    wp_enqueue_script( BELIEF_THEME_SLUG.'-config-requirejs', get_template_directory_uri() . '/app/js/app.js', array(), null);
+    wp_enqueue_script( BELIEF_THEME_SLUG.'-config-requirejs', get_template_directory_uri() . '/assets/js/main.min.js', array(), null);
 
     //localize the requireJS Config
-    wp_localize_script( BELIEF_THEME_SLUG.'-config-requirejs', 'the_js_reference', $js_dir );
+    wp_localize_script( BELIEF_THEME_SLUG.'-config-requirejs', 'javascript_args', $args );
 
     //custom app stylesheet
     wp_enqueue_style( BELIEF_THEME_SLUG.'-custom-style', get_template_directory_uri() . '/style.css', array(), null);  }
@@ -147,4 +146,5 @@ class Belief_WP {
 }
 
 new Belief_WP;
+require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );
 
