@@ -17,8 +17,8 @@ node_modules
 
 # Framework Builds
 # ------------------------------------------------------------
-public/wp-content/themes/beliefWP/assets/
-public/wp-content/themes/beliefWP/app/
+public/wp-content/themes/beliefWP
+public/wp-content/themes/beliefWP
 public/wp-content/plugins
 public/local/*.php
 
