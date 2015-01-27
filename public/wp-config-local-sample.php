@@ -44,3 +44,6 @@
 	 * in their development environments.
 	 */
 	define('WP_DEBUG', false);
+	define( 'BELIEF_THEME_SLUG', 'framework_test');
+	define( 'BELIEF_THEME_SLUG_UPPERCASE', strtoupper( BELIEF_THEME_SLUG ));
+	define( 'BELIEF_THEME_TITLE', ucwords( str_replace("_"," ",BELIEF_THEME_SLUG) ) );
