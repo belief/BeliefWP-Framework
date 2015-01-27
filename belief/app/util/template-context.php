@@ -7,7 +7,6 @@
 if ( !class_exists('Timber') ) {
 	echo 'Timber not activated. Activate the plugin in <a href="/wp-admin/plugins.php#timber">/wp-admin/plugins.php</a>';
 }
-
 $context = Timber::get_context();
 $context['settings'] = get_option( BELIEF_THEME_SLUG.'_theme_inputs_options' );
 $context['nowhere'] = 'javascript:void(0)';

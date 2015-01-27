@@ -3,7 +3,7 @@
 
 {% block hero %}
 <section class="container invert-text blog-title">
-    {% include '_search.twig' %}
+    {% include '_partials/_search.twig' %}
 </section>
 {% endblock %}
 
@@ -36,12 +36,12 @@
     </ul>
 
     <aside class="filter-posts">
-        {% include '_filters.twig' %}
+        {% include '_partials/_filters.twig' %}
     </aside>
 </section>
 
 <section class="container more-gap">
-    {% include '_paging.twig' %}
+    {% include '_partials/_paging.twig' %}
 </section>
 
 {% endblock %}

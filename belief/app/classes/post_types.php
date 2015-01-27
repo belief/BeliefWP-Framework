@@ -51,5 +51,4 @@ class Belief_Post_Types {
 	}
 }
 
-new Belief_Post_Types;
 ?>

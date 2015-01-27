@@ -50,17 +50,26 @@ gulp.task('cleanViews', function(){
 });
 
 // clean the views directory
+gulp.task('cleanWPFiles', function(){
+  return gulp.src([DIST+'*.php'], {read:false})
+    .pipe(clean());
+});
+
+// clean the views directory
 gulp.task('cleanPlugins', function(){
   return gulp.src([PLUGINS], {read:false})
     .pipe(clean());
 });
 
 //move Templates
-gulp.task('moveTemplates',['cleanViews'], function() {
+gulp.task('moveTemplates',['cleanViews','cleanWPFiles'], function() {
   gulp.src(SRC+'templates/**/*.*', { base: SRC+'templates'})
   .pipe(gulp.dest(DIST+'app/views'));
-
   notify().write({ message: "Moved Templates!" });
+
+  gulp.src(SRC+'wp_theme_files/*.php', { base: SRC+'wp_theme_files'})
+  .pipe(gulp.dest(DIST+''));
+  notify().write({ message: "Moved Wordpress Theme Files!" });
 });
 
 //move Plugins
@@ -164,6 +173,7 @@ gulp.task('watchMove', function() {
 
   gulp.watch(SRC + 'templates/*.*', ['moveTemplates']);
   gulp.watch(SRC + 'templates/**/*.*', ['moveTemplates']);
+  gulp.watch(SRC + 'wp_theme_files/*.php', ['moveTemplates']);
 
   gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);
   gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);

@@ -8,7 +8,7 @@ used for Timber, our templating system.
 */
 
 if ( !defined(Timber::$dirname) ) {
-    Timber::$dirname = 'app/views/';
+    Timber::$dirname = 'app/views/';	//this is relative to the theme folder root
 }
 /************* Includes ***************/
 require_once( dirname( __FILE__ )  . '/../classes/GTM_Data_Layer.php' );

@@ -41,6 +41,28 @@ class Belief_Admin_Init {
 
   }
 
+  
+  /**
+      Widget Setup
+
+  */
+
+  /**
+   * Register widgetized area and update sidebar with default widgets
+   */
+  public function belief_widgets_init() {
+    register_sidebar( array(
+      'name' => __( 'Sidebar' ),
+      'id' => 'primary-sidebar',
+      'before_widget' => '<div id="%1$s" class="widget %2$s">',
+      'after_widget' => "</div>",
+      'before_title' => '<div class="widget-title"><h3>',
+      'after_title' => '</h3></div>',
+    ) );
+
+  }
+
+
   /**
       Post Type Hooks
 
@@ -110,6 +132,4 @@ class Belief_Admin_Init {
     }
   }
 }
-
-new Belief_Admin_Init;
 

@@ -3,7 +3,7 @@
 
 {% block hero %}
 <section class="container invert-text blog-title">
-    {# {% include '_search.twig' %} #}
+    {% include '_partials/_search.twig' %}
 </section>
 {% endblock %}
 
@@ -27,10 +27,6 @@
         <div class="body">{{ post.content }}</div>
 
         <section id="author" class="author-box clearfix more-gap">
-            {% if fn('has_wp_user_avatar', post.post_author) %}
-            <div class="author-avatar">{{ fn('get_wp_user_avatar', post.post_author, 'square-thumb') }}</div>
-            {% endif %}
-
             <div class="author-bio">
                 <h4>Author: {{ post.author.name }}</h4>
                 {{ fn('the_author_meta', 'description', post.post_author) }}
@@ -39,7 +35,7 @@
     </article>
 
     <aside class="filter-posts">
-        {# {% include '_filters.twig' %} #}
+        {% include '_partials/_filters.twig' %}
     </aside>
 </section>
 

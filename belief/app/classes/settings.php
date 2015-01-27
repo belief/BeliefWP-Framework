@@ -7,10 +7,9 @@ class Belief_Settings {
 		//initialize the theme structure
 		//
 		if ( is_admin() ):
-			add_action( 'admin_menu', array( $this, 'belief_settings_api_init') );
-
 			add_action( 'admin_init', array( $this, 'belief_initialize_theme_options' ) );
 
+			add_action( 'admin_menu', array( $this, 'belief_settings_api_init') );
 		endif;
 	}
 
@@ -52,7 +51,8 @@ class Belief_Settings {
 	   <h2><?php _e( BELIEF_THEME_TITLE.' Theme Options' ); ?></h2>
 	   <?php settings_errors(); ?>
 
-	   <form method="post" action="options.php">
+	   <form method="post" action="/wp-admin/options.php">
+       <input type="hidden" value="/wp-admin/options.php?page=[<?php echo BELIEF_THEME_SLUG;?>_theme_inputs_options]" name="_wp_http_referer">
 	     <?php
 
 	       settings_fields( BELIEF_THEME_SLUG.'_theme_inputs_options' );
@@ -67,8 +67,23 @@ class Belief_Settings {
 
 	public function belief_initialize_default_theme_options() {
 	  $defaults = array(
-	    'heromp4link' => '',
-	    'herowebmlink' => ''
+	  	'heromp4link' => '',
+	  	'herowebmlink' => '',
+	  	'ga_tracking_id' => '',
+	  	'gtm_tracking' => '',
+	  	'office_address' => '',
+	  	'phone' => '',
+	  	'copyright' => '',
+	  	'facebook_url' => '',
+	  	'vimeo_url' => '',
+	  	'youtube_url' => '',
+	  	'twitter_url' => '',
+	  	'gplus_url' => '',
+	  	'instagram_url' => '',
+	  	'linkedin_url' => '',
+	  	'pinterest_url' => '',
+	  	'github_url' => ''
+
 	  );
 	  update_option( BELIEF_THEME_SLUG.'_theme_inputs_options', $defaults );
 	}
@@ -106,7 +121,7 @@ class Belief_Settings {
 	  add_settings_section(
 	    BELIEF_THEME_SLUG.'_analytics_section',
 	    __( 'Analytics'),
-	    array( $this, 'belief_video_info_callback'),
+	    array( $this, 'belief_analytics_callback'),
 	    BELIEF_THEME_SLUG.'_theme_inputs_options'
 	  );
 
@@ -242,10 +257,8 @@ class Belief_Settings {
 	  register_setting(
 	    BELIEF_THEME_SLUG.'_theme_inputs_options',
 	    BELIEF_THEME_SLUG.'_theme_inputs_options',
-	    array( $this, BELIEF_THEME_SLUG.'_theme_inputs_options')
+	    array( $this, 'belief_options_validate_inputs')
 	  );
-
-	  return;
 	}
 
 	/**
@@ -258,7 +271,11 @@ class Belief_Settings {
 	 * ------------------------------------------------------------------------
 	 */
 	public function belief_video_info_callback() {
-	  echo '<p>' . __( 'Administrative settings for '.BELIEF_THEME_TITLE.' Design') . '</p>';
+	  echo '<p>' . __( 'Video Tag Settings') . '</p>';
+	}
+
+	public function belief_analytics_callback() {
+	  echo '<p>' . __( 'Google Analytics Settings') . '</p>';
 	}
 
 	public function belief_biz_callback() {
@@ -489,5 +506,3 @@ class Belief_Settings {
 
 
 }
-
-new Belief_Settings;
