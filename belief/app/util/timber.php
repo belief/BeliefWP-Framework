@@ -11,7 +11,7 @@ if ( !defined(Timber::$dirname) ) {
     Timber::$dirname = 'app/views/';	//this is relative to the theme folder root
 }
 /************* Includes ***************/
-require_once( dirname( __FILE__ )  . '/../classes/GTM_Data_Layer.php' );
+require_once( dirname( __FILE__ )  . '/../classes/gtm_data_layer.php' );
 
 /************* VIEW HELPERS ***************/
 
