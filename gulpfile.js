@@ -67,7 +67,7 @@ gulp.task('moveTemplates',['cleanViews','cleanWPFiles'], function() {
   .pipe(gulp.dest(DIST+'app/views'));
   notify().write({ message: "Moved Templates!" });
 
-  gulp.src(SRC+'wp_theme_files/*.php', { base: SRC+'wp_theme_files'})
+  gulp.src(SRC+'wp_theme_files/*.*', { base: SRC+'wp_theme_files'})
   .pipe(gulp.dest(DIST+''));
   notify().write({ message: "Moved Wordpress Theme Files!" });
 });
@@ -149,11 +149,6 @@ gulp.task('movejsModules', function() {
 
 });
 
-//Notify initial build success
-gulp.task('buildSuccess', function() {
-    notify().write({ message: "Build was Successful!" });
-});
-
 // Gulp Watchers
 gulp.task('watchSCSS', function() {
   gulp.watch(SRC + 'scss/**/*.scss', ['scss']);
@@ -173,7 +168,7 @@ gulp.task('watchMove', function() {
 
   gulp.watch(SRC + 'templates/*.*', ['moveTemplates']);
   gulp.watch(SRC + 'templates/**/*.*', ['moveTemplates']);
-  gulp.watch(SRC + 'wp_theme_files/*.php', ['moveTemplates']);
+  gulp.watch(SRC + 'wp_theme_files/*.*', ['moveTemplates']);
 
   gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);
   gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);
@@ -184,4 +179,4 @@ gulp.task('watchMove', function() {
 gulp.task('scssBuild', ['scss', 'watchSCSS']);
 gulp.task('jsBuild', ['movejsVendor','movejsModules','requirejsBuild', 'jsNotify','watchJS']);
 gulp.task('moveBuild', ['move', 'moveTemplates', 'movePlugins', 'watchMove']);
-gulp.task('default', ['scssBuild', 'moveBuild','jsBuild','buildSuccess']);
+gulp.task('default', ['scssBuild', 'moveBuild','jsBuild']);

@@ -6,7 +6,7 @@ class Belief_Settings {
 		$this->instance =& $this;
 		//initialize the theme structure
 		//
-		if ( is_admin() ):
+		if ( is_admin() && !function_exists('optionsframework_init') ):
 			add_action( 'admin_init', array( $this, 'belief_initialize_theme_options' ) );
 
 			add_action( 'admin_menu', array( $this, 'belief_settings_api_init') );
@@ -24,7 +24,7 @@ class Belief_Settings {
 	    BELIEF_THEME_TITLE.' Theme',          // The text to be displayed for this menu item
 	    'administrator',          // Which type of users can see this menu item
 	    BELIEF_THEME_SLUG.'_theme_options',      // The unique ID - that is, the slug - for this menu item
-	    array( $this, BELIEF_THEME_SLUG.'_theme_inputs')       // The name of the function to call when rendering this menu's page
+	    array( $this, 'belief_theme_inputs')       // The name of the function to call when rendering this menu's page
 	  );
 
 	  add_menu_page(

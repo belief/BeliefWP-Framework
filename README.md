@@ -46,6 +46,7 @@ Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metab
 
 - http://www.billerickson.net/wordpress-metaboxes/
 - http://codex.wordpress.org/Template_Hierarchy
+- https://github.com/devinsays/options-framework-plugin
 
 ####Create a Locall Database file: Template as follows"
 - create a local folder inside public

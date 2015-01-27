@@ -17,9 +17,11 @@ global $belief_WP;
 global $admin_Belief_WP;
 global $framework_settings;
 
-require_once( dirname( __FILE__ )  . '/classes/settings.php' );
-require_once( dirname( __FILE__ )  . '/classes/post_types.php' );
 require_once( dirname( __FILE__ )  . '/admin/belief_admin_init.php' );
+require_once( dirname( __FILE__ )  . '/classes/post_types.php' );
+
+//deprecated
+require_once( dirname( __FILE__ )  . '/classes/deprecated/settings-deprecated.php' );
 
 
 class Belief_WP {
