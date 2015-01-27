@@ -3,11 +3,17 @@
 Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metabox Types, SCSS and RequireJS builds using Gulp Worflow.
 
 ##Features##
-* Dev folder consists of all app functionality
+* belief folder consists of all app functionality
+* Uses Gulp to transfer all files into theme folder
+* Customizable theme naming with easy option and metaboxes
 * Pre-built Design
-* Use Bourbon SCSS [Bourbon.io](http://bourbon.io/)
-* Using NEAT grid layout [Neat Bourbon](http://neat.bourbon.io/)
-* requireJS Module Builds [requireJS](http://requirejs.org/)
+* [Use Bourbon SCSS](http://bourbon.io/)
+* [Using NEAT grid layout](http://neat.bourbon.io/)
+* [requireJS Module Builds](http://requirejs.org/)
+* [Uses Options Framework Plugin](http://www.billerickson.net/wordpress-metaboxes/)
+* [Uses Twig Templating](https://wordpress.org/plugins/timber-library/)
+* [Uses Custom Wordpress Metaboxes](http://www.billerickson.net/wordpress-metaboxes/)
+* [Uses Wordpress Template Heirarchy](http://codex.wordpress.org/Template_Hierarchy)
 
 ##Note On Compatibility##
 1. RequireJS
@@ -41,12 +47,6 @@ Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metab
 	1. ensure npm is installed.
 	2. npm install (sudo may be required)
 	3. gulp
-
-####A few frameworks to be aware of:
-
-- http://www.billerickson.net/wordpress-metaboxes/
-- http://codex.wordpress.org/Template_Hierarchy
-- https://github.com/devinsays/options-framework-plugin
 
 ####Create a Locall Database file: Template as follows"
 - create a local folder inside public
