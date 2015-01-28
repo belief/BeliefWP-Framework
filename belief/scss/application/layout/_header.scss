@@ -12,6 +12,8 @@ header#header {
 	a {
 		display: block;
 		color: $color__link-header;
+		text-decoration: none;
+		@include big-underline(transparent, $color__link-footer-hover);
 
 		&:visited {
 			color: $color__link-header;

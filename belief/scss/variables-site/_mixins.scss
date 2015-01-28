@@ -44,3 +44,14 @@
     image-rendering: $mode;
   }
 }
+
+@mixin big-underline( $regColor:transparent, $hoverColor:#ffffff, $size:2px) {
+  border-bottom: $size solid $regColor;
+  display: inline-block;
+  padding: 2px 0;
+
+  &:hover {
+    color: $hoverColor;
+    border-bottom: $size solid $hoverColor;
+  }
+}
