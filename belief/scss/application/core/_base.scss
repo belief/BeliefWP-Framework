@@ -4,8 +4,21 @@
     box-sizing: content-box;
 }
 
+*,
+*:before,
+*:after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+    box-sizing: inherit;
+}
+
 html {
     line-height: 1.4;
+    box-sizing: border-box;
+    background-color: $color__background-html;
+}
+
+body {
+    margin: 0;
+    background-color: $color__background-body;
 }
 
 ::-moz-selection,

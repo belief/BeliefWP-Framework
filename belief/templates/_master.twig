@@ -14,15 +14,19 @@
             <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <header class="header {{ darken_header }}" {{ header_bg }}>
-            {% block header %}
-            <div class="container">
-                {% include '_partials/_header.twig' %}
-            </div>
-            {% endblock %}
-            {% block hero %}
-                {% include '_partials/_hero.twig' %}
-            {% endblock %}
+        <header id="header" class="header {{ darken_header }}" {{ header_bg }}>
+            <section class="site-header">
+                {% block header %}
+                <div class="container">
+                    {% include '_partials/_header.twig' %}
+                </div>
+                {% endblock %}
+            </section>
+            <section class="hero">
+                {% block hero %}
+                    {% include '_partials/_hero.twig' %}
+                {% endblock %}
+            </section>
         </header>
 
         <div id="content" role="main" class="content-wrapper">
@@ -31,10 +35,8 @@
             {% endblock %}
         </div>
 
-        <footer id="footer">
-            <div class="container">
-                {% include '_partials/_footer.twig' %}
-            </div>
+        <footer id="footer" class="site-footer">
+            {% include '_partials/_footer.twig' %}
         </footer>
 
         {% block body %}

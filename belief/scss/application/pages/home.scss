@@ -1,0 +1,11 @@
+.home-main {
+
+	.container {
+		@include outer-container;
+
+		section {
+			@include span-columns(6);
+			@include shift(3);
+		}
+	}
+}

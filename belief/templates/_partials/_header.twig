@@ -1,18 +1,22 @@
 
-<div class="header-container">
-    <header class="wrapper clearfix">
-        <a href="/">
-            <!--  Site Logo -->
-            <div class="site-logo"></div>
-            <!-- End Site Logo -->
-        </a>
-        <nav class="primary-navigation">
-            {{ fn('primary_navigation') }}
-        </nav>
-    </header>
+<div class="main-header">
+    <div class="wrapper clearfix">
+        <div class="logo-wrapper">
+            <a class="" href="/">
+                <!--  Site Logo -->
+                <div class="site-logo">Site Logo</div>
+                <!-- End Site Logo -->
+            </a>
+        </div>
+        <div class="nav-wrapper">
+            <nav class="primary-navigation">
+                {{ fn('primary_navigation') }}
+            </nav>
+        </div>
+    </div>
 </div>
 
-<section role="header" class="header-bar">
+<div class="header-bar">
     <div class="header-bar-border"></div>
 
     <h2 class="logo" role="banner">
@@ -23,5 +27,5 @@
     </h2>
 
     <a href="{{ nowhere }}" class="menu-switch"><span></span></a>
-</section>
+</div>
 

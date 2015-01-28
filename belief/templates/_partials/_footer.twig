@@ -1,8 +1,10 @@
-<footer>
+<div class="outer-container">
 	<section>
 	    <div class="contact">
-	        {{ fn('nl2br', settings.office_address) }}<br />
-	        {{ settings.phone }}
+	    	<p>
+		        {{ fn('nl2br', settings.office_address) }}<br />
+		        {{ settings.phone }}
+		    </p>
 	    </div>
 	    <div class="social">
 	        <ul class="social-links">
@@ -22,5 +24,4 @@
 	<section>
 	    <p class="copyright">&copy; {{ settings.copyright }}</p>
 	</section>
-
-</footer>
+</div>

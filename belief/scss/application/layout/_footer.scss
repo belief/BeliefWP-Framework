@@ -1,0 +1,46 @@
+.site-footer {
+	width: 100%;
+	background-color: $color__background-footer;
+	color: $color__text-footer;
+
+	.outer-container {
+		@include outer-container;
+		width: 90%;
+
+		section {
+			@include span-columns(6);
+
+			&:last-child {
+				text-align: right;
+			}
+		}
+	}
+
+	a {
+		color: $color__link-footer;
+
+		&:visited {
+			color: $color__link-footer;
+		}
+
+		&:hover {
+			color: $color__link-footer-hover;
+		}
+	}
+
+	.social-links {
+		list-style: none;
+		margin-left: 0;
+		padding: 0;
+
+		li {
+			display: inline-block;
+			margin-right: 15px;
+			font-size: 1.5rem;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}
