@@ -116,16 +116,43 @@ gulp.task('scss', function(){
 });
 
 //Build JS through R.js
-gulp.task('requirejsBuild', function() {
+gulp.task('requirejsBuild', ['moveJS'], function() {
+  gulp.src( SRC + 'js/vendor/*.js')
+    .pipe(uglify())
+    .pipe((gulp.dest( DIST + 'assets/js/vendor/')));
+
+  gulp.src( SRC + 'js/modules/*.js')
+      .pipe(uglify())
+      .pipe((gulp.dest( DIST + 'assets/js/modules/')));
   rjs({
-      baseUrl: SRC + '/js',
+      baseUrl: SRC + '/js/',
+      paths: {
+          jquery: 'vendor/jquery-1.11.0.min',
+          jqueryui: 'vendor/jqueryui.min.js',
+          modernizr: 'vendor/modernizr',
+          fastclick: 'vendor/fastclick',
+          froogaloop: 'vendor/froogaloop',
+          history: 'vendor/history',
+          infinitescroll: 'vendor/infinitescroll',
+          isotope: 'vendor/isotope',
+          owl: 'vendor/owl.carousel.min',
+          lazyload: 'vendor/lazyload',
+          mediaelement: 'vendor/mediaelement',
+          spin: 'vendor/spin.min',
+          imagesloaded: 'vendor/imagesloaded.pkgd.min',
+          masonry: 'vendor/masonry.pkgd.min',
+          _common: 'modules/_common',
+          _nav: 'modules/_nav',
+          _carousel: 'modules/_carousel'
+      },
       mainConfigFile: SRC + '/js/app.js',
       optimize: "uglify2",
       name: 'main',
       out: 'main.min.js'
   })
   .pipe(uglify())
-  .pipe(gulp.dest(DIST + 'assets/js'));
+  .pipe(gulp.dest(DIST + 'assets/js'))
+  .pipe(notify({ message: "JS Compiled successfully!" }));
 });
 
 //notify js is compiled
@@ -134,19 +161,14 @@ gulp.task('jsNotify', function() {
 });
 
 //move vendor files
-gulp.task('movejsVendor', function() {
-  return gulp.src( SRC + 'js/vendor/*.js')
+gulp.task('moveJS', function() {
+  gulp.src( SRC + 'js/vendor/*.js')
     .pipe(uglify())
     .pipe((gulp.dest( DIST + 'assets/js/vendor/')));
 
-});
-
-//move module files
-gulp.task('movejsModules', function() {
-  return gulp.src( SRC + 'js/modules/*.js')
-    .pipe(uglify())
-    .pipe((gulp.dest( DIST + 'assets/js/modules/')));
-
+  gulp.src( SRC + 'js/modules/*.js')
+      .pipe(uglify())
+      .pipe((gulp.dest( DIST + 'assets/js/modules/')));
 });
 
 // Gulp Watchers
@@ -177,6 +199,6 @@ gulp.task('watchMove', function() {
 
 // Gulp Default Task
 gulp.task('scssBuild', ['scss', 'watchSCSS']);
-gulp.task('jsBuild', ['movejsVendor','movejsModules','requirejsBuild', 'jsNotify','watchJS']);
+gulp.task('jsBuild', ['requirejsBuild','watchJS']);
 gulp.task('moveBuild', ['move', 'moveTemplates', 'movePlugins', 'watchMove']);
 gulp.task('default', ['scssBuild', 'moveBuild','jsBuild']);

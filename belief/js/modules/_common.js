@@ -1,6 +1,14 @@
-define(['_nav','fastclick'], function(_nav, FastClick) {
+define(['_nav','fastclick', 'lazyload'], function(_nav, FastClick) {
 
     var $win, $doc, $body;
+
+    var loadImages = function() {
+        $("img.lazy").lazyload({
+            event           : "ready",
+            effect           : "fadeIn"
+        });
+    }
+
 
     return {
         init: function($w, $d) {

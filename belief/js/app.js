@@ -1,27 +1,30 @@
 require.config({
-    baseURL: '/wp-content/themes/beliefWP/assets/js/',
     waitSeconds: 120,
     paths: {
-        jquery: 'vendor/jquery-1.11.0.min',
-        jqueryui: 'vendor/jqueryui.min.js',
-        modernizr: 'vendor/modernizr',
-        fastclick: 'vendor/fastclick',
-        froogaloop: 'vendor/froogaloop',
-        history: 'vendor/history',
-        infinitescroll: 'vendor/infinitescroll',
-        isotope: 'vendor/isotope',
-        mediaelement: 'vendor/mediaelement',
-        spin: 'vendor/spin.min',
-        imagesloaded: 'vendor/imagesloaded.pkgd.min',
-        masonry: 'vendor/masonry.pkgd.min',
-        _common: 'modules/_common',
-        _nav: 'modules/_nav',
+        jquery: '/wp-content/themes/beliefWP/assets/js/vendor/jquery-1.11.0.min',
+        jqueryui: '/wp-content/themes/beliefWP/assets/js/vendor/jqueryui.min.js',
+        modernizr: '/wp-content/themes/beliefWP/assets/js/vendor/modernizr',
+        fastclick: '/wp-content/themes/beliefWP/assets/js/vendor/fastclick',
+        froogaloop: '/wp-content/themes/beliefWP/assets/js/vendor/froogaloop',
+        history: '/wp-content/themes/beliefWP/assets/js/vendor/history',
+        infinitescroll: '/wp-content/themes/beliefWP/assets/js/vendor/infinitescroll',
+        isotope: '/wp-content/themes/beliefWP/assets/js/vendor/isotope',
+        owl: '/wp-content/themes/beliefWP/assets/js/vendor/owl.carousel.min',
+        lazyload: '/wp-content/themes/beliefWP/assets/js/vendor/lazyload',
+        mediaelement: '/wp-content/themes/beliefWP/assets/js/vendor/mediaelement',
+        spin: '/wp-content/themes/beliefWP/assets/js/vendor/spin.min',
+        imagesloaded: '/wp-content/themes/beliefWP/assets/js/vendor/imagesloaded.pkgd.min',
+        masonry: '/wp-content/themes/beliefWP/assets/js/vendor/masonry.pkgd.min',
+        _common: '/wp-content/themes/beliefWP/assets/js/modules/_common',
+        _nav: '/wp-content/themes/beliefWP/assets/js/modules/_nav',
+        _carousel: '/wp-content/themes/beliefWP/assets/js/modules/_carousel'
     },
     shim: {
       'jquery': {
           exports: '$'
       },
-      'mediaelement' : ['jquery']
+      'mediaelement' : ['jquery'],
+      'lazyload' : ['jquery']
     }
 });
 
@@ -30,8 +33,7 @@ define(['require', 'jquery', '_common', 'modernizr'], function(require, $, _comm
   var $win = $(window),
       $doc = $(document),
       moduleNames = [
-        '_common',
-        '_nav'
+        'carousel'
       ],
       moduleQueue = [];
 
