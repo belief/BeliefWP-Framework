@@ -1,0 +1,15 @@
+.wphootsuitedashboard h2 {
+    padding-top : 20px;
+}
+
+#hootsuite-logo {
+    background : url("../images/hootsuite-logo.png") no-repeat scroll 0 0 transparent;
+    height     : 50px;
+    width      : 143px;
+}
+
+iframe#hootsuite-iframe {
+    margin-top : 20px;
+    min-height : 1024px;
+    width      : 100%;
+}

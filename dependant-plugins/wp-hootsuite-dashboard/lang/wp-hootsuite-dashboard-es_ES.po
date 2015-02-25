@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP HootSuite Dashboard  0.1.3\n"
+"POT-Creation-Date: 2014-03-27 23:14+0800\n"
+"PO-Revision-Date: 2014-03-27 23:14+0800\n"
+"Last-Translator: Jelena Kovacevic <jecajeca260@gmail.com>\n"
+"Language-Team: Jagged Edge Media <support@jaggededgemedia.com>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: core\n"
+
+#: core/controllers/admin/AdminController.php:61
+#: core/controllers/admin/AdminController.php:73
+#: core/controllers/admin/AdminController.php:74
+#: core/views/admin/admin-hootsuite-dashboard.php:4
+msgid "Dashboard"
+msgstr "Panel de Control"
+
+#: core/controllers/admin/AdminController.php:62
+msgid "Hootsuite"
+msgstr "Hootsuite"
+
+#: core/controllers/admin/AdminController.php:82
+#: core/controllers/admin/AdminController.php:83
+#: core/views/admin/admin-hootsuite-settings.php:4
+msgid "Settings"
+msgstr "Configuración"
+
+#: core/controllers/admin/AdminController.php:120
+msgid "User Permissions"
+msgstr "Permisos de Usuario"
+
+#: core/controllers/admin/AdminController.php:126
+msgid "Allow Dashboard access for the following user roles:"
+msgstr "Permitir acceso al Panel de Control para los siguientes roles:"
+
+#: core/controllers/admin/AdminController.php:162
+#, php-format
+msgid "Unknown field: %s"
+msgstr "Campo desconocido: %s"
+
+#: core/views/admin/admin-hootsuite-settings.php:7
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tiene los permisos suficientes para acceder a esta página."
+
+#: core/views/view-error.php:2
+#, php-format
+msgid "Unable to locate view: \"%s\""
+msgstr "No es posible localizar la vista: \"%s\""
