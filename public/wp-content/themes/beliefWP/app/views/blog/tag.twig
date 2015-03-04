@@ -1,0 +1,47 @@
+
+{% extends '_master.twig' %}
+
+{% block hero %}
+<section class="container invert-text blog-title">
+    {% include '_partials/_search.twig' %}
+</section>
+{% endblock %}
+
+
+{% block content %}
+
+<section id="above-fold" class="container">
+    <ul class="grid archived-posts">
+      {% for post in posts %}
+        <li class="grid-cell post">
+            {% if  post.thumbnail %}
+              <a href="{{ post.permalink }}" class="img-link"><img src="{{ post.thumbnail.src('square-thumb') }}"/></a>
+            {% else %}
+              <a href="{{ post.permalink }}" class="img-link"><img src="{{ fn('assets_url') }}/images/gray-450x450.png"/></a>
+            {% endif %}
+
+            <h2><a href="{{ post.permalink }}">{{ post.title }}</a></h2>
+            <p class="post-meta">
+                {{ post.display_date }}
+                by {{ post.author }}
+                {% if post.category != 'Uncategorized' %}
+                  in <a href="{{ post.category.url }}">{{ post.category }}</a>
+                {% endif %}
+            </p>
+            {{ post.get_preview(35) }}
+        </li>
+      {% else %}
+        <li>Sorry, no posts matched your criteria</li>
+      {% endfor %}
+    </ul>
+
+    <aside class="filter-posts">
+        {% include '_partials/_filters.twig' %}
+    </aside>
+</section>
+
+<section class="container more-gap">
+    {% include '_partials/_paging.twig' %}
+</section>
+
+{% endblock %}

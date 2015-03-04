@@ -1,0 +1,27 @@
+<div class="outer-container">
+	<section>
+	    <div class="contact">
+	    	<p>
+		        {{ fn('nl2br', settings.office_address) }}<br />
+		        {{ settings.phone }}
+		    </p>
+	    </div>
+	    <div class="social">
+	        <ul class="social-links">
+	            {% if settings.facebook_url %}<li><a href="{{ settings.facebook_url }}" class="ss-icon" target="_blank">facebook</a></li>{% endif %}
+	            {% if settings.vimeo_url %}<li><a href="{{ settings.vimeo_url }}" class="ss-icon" target="_blank">vimeo</a></li>{% endif %}
+	            {% if settings.youtube_url %}<li><a href="{{ settings.youtube_url }}" class="ss-icon" target="_blank">youtube</a></li>{% endif %}
+	            {% if settings.twitter_url %}<li><a href="{{ settings.twitter_url }}" class="ss-icon" target="_blank">twitter</a></li>{% endif %}
+	            {% if settings.gplus_url %}<li><a href="{{ settings.gplus_url }}" class="ss-icon" target="_blank">google+</a></li>{% endif %}
+	            {% if settings.instagram_url %}<li><a href="{{ settings.instagram_url }}" class="ss-icon" target="_blank">instagram</a></li>{% endif %}
+	            {% if settings.linkedin_url %}<li><a href="{{ settings.linkedin_url }}" class="ss-icon" target="_blank">linkedin</a></li>{% endif %}
+	            {% if settings.pinterest_url %}<li><a href="{{ settings.pinterest_url }}" class="ss-icon" target="_blank">pinterest</a></li>{% endif %}
+	            {% if settings.github_url %}<li><a href="{{ settings.github_url }}" class="ss-icon" target="_blank">github</a></li>{% endif %}
+	            <li><a href="{{ fn('get_bloginfo_rss', 'rss2_url') }}" class="ss-icon" target="_blank">rss</a></li>
+	        </ul>
+	    </div>
+	</section>
+	<section>
+	    <p class="copyright">&copy; {{ settings.copyright }}</p>
+	</section>
+</div>
