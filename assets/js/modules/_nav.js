@@ -1,1 +1,0 @@
-"use strict";define(["jquery"],function(e){var i,n,o=e("body"),t=(e("main"),function(){o.toggleClass("is-active")}),u=function(){o.removeClass("is-active")},s=function(){i.resize(function(){i.outerWidth()>640&&u()})};return{init:function(e,o){i=e,n=o,s(),javascript_args.wp_debug&&console.log("nav loaded")},toggleMobileMenu:t,removeMobileMenu:u}});

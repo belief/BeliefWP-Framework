@@ -1,1 +1,0 @@
-define(["owl"],function(){var n,o;return{init:function(e,a){n=e,o=a,o.ready(function(){javascript_args.wp_debug&&console.log("carousel loaded")})}}});
