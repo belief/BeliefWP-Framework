@@ -1,0 +1,68 @@
+
+{% extends '_master.twig' %}
+
+{% block hero %}
+<section class="container invert-text blog-title">
+    {% include '_partials/_search.twig' %}
+</section>
+{% endblock %}
+
+
+{% block content %}
+
+<section id="above-fold" class="container">
+    <article class="post featured-post">
+
+        {% if  featured.thumbnail %}
+          <a href="{{ featured.permalink }}" class="img-link"><img src="{{ featured.thumbnail.src('post-thumb') }}"/></a>
+        {% else %}
+            <a href="{{ post.permalink }}" class="img-link"><img src="{{ fn('assets_url') }}/images/gray-656x377.png"/></a>
+        {% endif %}
+
+        <h2><a href="{{ featured.permalink }}">{{ featured.title }}</a></h2>
+        <p class="post-meta">
+            {{ featured.display_date }}
+            by {{ featured.author }}
+            {% if featured.category != 'Uncategorized' %}
+              in <a href="{{ featured.category.url }}">{{ featured.category }}</a>
+            {% endif %}
+        </p>
+        {{ featured.get_preview(35) }}
+    </article>
+
+    <aside class="filter-posts">
+        {% include '_partials/_filters.twig' %}
+    </aside>
+</section>
+
+<section id="below-fold" class="container">
+    <ul id="posts" class="grid">
+      {% for entry in posts %}
+        <li class="grid-cell post">
+            {% if  entry.thumbnail %}
+              <a href="{{ entry.permalink }}" class="img-link"><img src="{{ entry.thumbnail.src('square-thumb') }}"/></a>
+            {% else %}
+              <a href="{{ entry.permalink }}" class="img-link"><img src="{{ fn('assets_url') }}/images/gray-450x450.png"/></a>
+            {% endif %}
+
+            <h2><a href="{{ entry.permalink }}">{{ entry.title }}</a></h2>
+            <p class="post-meta">
+                {{ entry.display_date }}
+                by {{ entry.author }}
+                {% if entry.category != 'Uncategorized' %}
+                  in <a href="{{ entry.category.url }}">{{ entry.category }}</a>
+                {% endif %}
+            </p>
+            {{ entry.get_preview(35) }}
+        </li>
+      {% else %}
+        <li class="none">No posts matched</li>
+      {% endfor %}
+    </ul>
+</section>
+
+<section class="container more-gap">
+    {% include '_partials/_paging.twig' %}
+</section>
+
+{% endblock %}

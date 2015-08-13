@@ -9,20 +9,11 @@ Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metab
 * Pre-built Design
 * [Use Bourbon SCSS](http://bourbon.io/)
 * [Using NEAT grid layout](http://neat.bourbon.io/)
-* [requireJS Module Builds](http://requirejs.org/)
-* [Uses Options Framework Plugin](http://www.billerickson.net/wordpress-metaboxes/)
-* [Uses Twig Templating](https://wordpress.org/plugins/timber-library/)
-* [Uses Custom Wordpress Metaboxes](http://www.billerickson.net/wordpress-metaboxes/)
+* [Uses Advanced Custom Fields](advancedcustomfields.com/)
 * [Uses Wordpress Template Heirarchy](http://codex.wordpress.org/Template_Hierarchy)
 
 ##Note On Compatibility##
-1. RequireJS
-	* IE 6+ .......... compatible ✔
-	* Firefox 2+ ..... compatible ✔
-	* Safari 3.2+ .... compatible ✔
-	* Chrome 3+ ...... compatible ✔
-	* Opera 10+ ...... compatible ✔
-2. [@mixin calc](http://caniuse.com/#feat=calc)
+1. [@mixin calc](http://caniuse.com/#feat=calc)
 	* IE 10+ (Mobile 10+) 		...... compatible ✔
 	* Firefox 4+ (Android 33+)  ...... compatible ✔
 	* Chrome 19+ (Android 39+) 	...... compatible ✔
@@ -48,9 +39,12 @@ Wordpress Theme Framework which uses Wordpress' Template Heirarchy, Custom Metab
 	2. npm install (sudo may be required)
 	3. gulp
 
-####Create a Locall Database file: Template as follows"
+####Note on WPEngine Installs:
+	* wp-config.php must be excluded in .gitignore!
+	* htaccess or other server files are not used
+
+####Create a Local Database file: Template as follows"
 - create a local folder inside public
-- create a file inside local folder: wp-config.php
 - use the template below for local settings:
 
 ```<?php

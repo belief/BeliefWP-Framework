@@ -22,20 +22,9 @@ var gulp = require('gulp'),
     lr = require('tiny-lr'),
     server = lr();
 
-//theme slug
-var themeSlug = 'beliefWP';
-
 // Directories
-var SRC = 'belief/',
-    DIST = 'public/wp-content/themes/'+themeSlug+'/',
-    PLUGINS = 'public/wp-content/plugins/';
-
-
-// Regular Files to Move
-var filesToMove = [
-      SRC+'app/**/*.*',
-      SRC+'assets/**/*.*'
-    ];
+var SRC = 'dev/',
+    DIST = 'assets/',
 
 // clean the dist directory
 gulp.task('clean', function(){
@@ -55,41 +44,9 @@ gulp.task('cleanWPFiles', function(){
     .pipe(clean());
 });
 
-// clean the views directory
-gulp.task('cleanPlugins', function(){
-  return gulp.src([PLUGINS], {read:false})
-    .pipe(clean());
-});
-
-//move Templates
-gulp.task('moveTemplates',['cleanViews','cleanWPFiles'], function() {
-  gulp.src(SRC+'templates/**/*.*', { base: SRC+'templates'})
-  .pipe(gulp.dest(DIST+'app/views'));
-  notify().write({ message: "Moved Templates!" });
-
-  gulp.src(SRC+'wp_theme_files/*.*', { base: SRC+'wp_theme_files'})
-  .pipe(gulp.dest(DIST+''));
-  notify().write({ message: "Moved Wordpress Theme Files!" });
-});
-
-//move Plugins
-gulp.task('movePlugins',['cleanPlugins'], function() {
-  gulp.src('dependant-plugins/**/*.*', { base: 'dependant-plugins/'})
-  .pipe(gulp.dest(PLUGINS))
-
-  notify().write({ message: "Moved Plugins!" });
-});
-
-
-//move app files
-gulp.task('move',['clean'], function(){
-  gulp.src(filesToMove, { base: SRC+'/dist/' })
-  .pipe(gulp.dest(DIST+'/dist/'));
-});
-
 // SCSS Compiling and Minification
 gulp.task('scss', function(){
-  return gulp.src(SRC + 'scss/app.scss')
+  return gulp.src(SRC + '/scss/app.scss')
     .pipe(scsslint({
       'config': '.scsslint.yml'
     }))
@@ -109,67 +66,32 @@ gulp.task('scss', function(){
       })
     )
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(minifycss())
-    .pipe( gulp.dest(DIST + 'assets/css/') )
-    .pipe(livereload());
+    .on('error', errorHandler)
+    // .pipe(rename({ suffix: '.min' }))
+    // .pipe(minifycss())
+    .pipe(gulp.dest(DIST + '/styles') )
+    .pipe(livereload(server.listen(44455)));
 });
 
-//Build JS through R.js
-gulp.task('requirejsBuild', ['moveJS'], function() {
-  gulp.src( SRC + 'js/vendor/*.js')
+
+//js linter
+gulp.task('js', function() {
+  return gulp.src(SRC+ '/js/app.js')
+    .pipe(include())
+      .on('error', console.log)
+    // .pipe(jshint())
+    // .pipe(jshint.reporter('default', { verbose: true }))
     .pipe(uglify())
-    .pipe((gulp.dest( DIST + 'assets/js/vendor/')));
-
-  gulp.src( SRC + 'js/modules/*.js')
-      .pipe(uglify())
-      .pipe((gulp.dest( DIST + 'assets/js/modules/')));
-  rjs({
-      baseUrl: SRC + '/js/',
-      paths: {
-          jquery: 'vendor/jquery-1.11.0.min',
-          jqueryui: 'vendor/jqueryui.min.js',
-          modernizr: 'vendor/modernizr',
-          fastclick: 'vendor/fastclick',
-          froogaloop: 'vendor/froogaloop',
-          history: 'vendor/history',
-          infinitescroll: 'vendor/infinitescroll',
-          isotope: 'vendor/isotope',
-          owl: 'vendor/owl.carousel.min',
-          lazyload: 'vendor/lazyload',
-          mediaelement: 'vendor/mediaelement',
-          spin: 'vendor/spin.min',
-          imagesloaded: 'vendor/imagesloaded.pkgd.min',
-          masonry: 'vendor/masonry.pkgd.min',
-          _common: 'modules/_common',
-          _nav: 'modules/_nav',
-          _carousel: 'modules/_carousel'
-      },
-      mainConfigFile: SRC + '/js/app.js',
-      optimize: "uglify2",
-      name: 'main',
-      out: 'main.min.js'
-  })
-  .pipe(uglify())
-  .pipe(gulp.dest(DIST + 'assets/js'))
-  .pipe(notify({ message: "JS Compiled successfully!" }));
+    .pipe(gulp.dest(DIST + '/js') )
+    .pipe(livereload(server.listen(44455)));
 });
 
-//notify js is compiled
-gulp.task('jsNotify', function() {
-    notify().write({ message: "JS Compiled successfully!" });
+// Clean dist directory for rebuild
+gulp.task('clean', function() {
+  return gulp.src(DIST, {read: false})
+    .pipe(clean());
 });
 
-//move vendor files
-gulp.task('moveJS', function() {
-  gulp.src( SRC + 'js/vendor/*.js')
-    .pipe(uglify())
-    .pipe((gulp.dest( DIST + 'assets/js/vendor/')));
-
-  gulp.src( SRC + 'js/modules/*.js')
-      .pipe(uglify())
-      .pipe((gulp.dest( DIST + 'assets/js/modules/')));
-});
 
 // Gulp Watchers
 gulp.task('watchSCSS', function() {
@@ -178,27 +100,17 @@ gulp.task('watchSCSS', function() {
 });
 
 gulp.task('watchJS', function() {
-  gulp.watch(SRC + 'js/**/*.js', ['requirejsBuild','jsNotify']);
-  gulp.watch(SRC + 'js/*.js', ['requirejsBuild','jsNotify']);
+  gulp.watch(SRC + 'js/**/*.js', ['js']);
+  gulp.watch(SRC + 'js/*.js', ['js']);
 });
-
-gulp.task('watchMove', function() {
-  gulp.watch(SRC + 'app/**/*.*', ['move']);
-  gulp.watch(SRC + 'static/**/*.*', ['move']);
-  gulp.watch(SRC + 'static/*.*', ['move']);
-  gulp.watch(SRC + 'app/*.*', ['move']);
-
-  gulp.watch(SRC + 'templates/*.*', ['moveTemplates']);
-  gulp.watch(SRC + 'templates/**/*.*', ['moveTemplates']);
-  gulp.watch(SRC + 'wp_theme_files/*.*', ['moveTemplates']);
-
-  gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);
-  gulp.watch('dependant-plugins/**/*.*', ['movePlugins']);
-});
-
 
 // Gulp Default Task
 gulp.task('scssBuild', ['scss', 'watchSCSS']);
-gulp.task('jsBuild', ['requirejsBuild','watchJS']);
-gulp.task('moveBuild', ['move', 'moveTemplates', 'movePlugins', 'watchMove']);
-gulp.task('default', ['scssBuild', 'moveBuild','jsBuild']);
+gulp.task('jsBuild', ['js','watchJS']);
+
+
+// Handle the error
+function errorHandler (error) {
+  console.log(error.toString());
+  this.emit('end');
+}
