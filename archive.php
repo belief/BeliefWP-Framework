@@ -1,21 +1,17 @@
-<?php
-/**
- * Template Name: Blog Archive
- *
- * The template for displaying archived blog posts
- * 
- * @package BeliefWP Framework
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.2
- */
-global $num_posts;
-
-// Setup the context
-require_once ( get_template_directory() .'/app/util/template-context.php' );
-
-// Customize query
-$context['posts'] = Timber::get_posts('posts_per_page='. $num_posts .'&offset='. ($num_posts + 1)); // TODO: Finish paging
-
-// Render the page
-Timber::render('blog/archive.twig', $context);
+<?php get_header(); ?>
+<section id="content" role="main">
+	<header class="header">
+		<h1 class="entry-title"><?php
+		if ( is_day() ) { printf( __( 'Daily Archives: %s', 'blankslate' ), get_the_time( get_option( 'date_format' ) ) ); }
+		elseif ( is_month() ) { printf( __( 'Monthly Archives: %s', 'blankslate' ), get_the_time( 'F Y' ) ); }
+		elseif ( is_year() ) { printf( __( 'Yearly Archives: %s', 'blankslate' ), get_the_time( 'Y' ) ); }
+		else { _e( 'Archives', 'blankslate' ); }
+		?></h1>
+	</header>
+	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+	<?php get_template_part( 'entry' ); ?>
+	<?php endwhile; endif; ?>
+	<?php get_template_part( 'nav', 'below' ); ?>
+</section>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

@@ -1,16 +1,11 @@
-<?php
-/**
- * Third party plugins that hijack the theme will call wp_footer() to get the footer template.
- * We use this to end our output buffer (started in header.php) and render into the view/page-plugin.twig template.
- *
- * 
- * @package BeliefWP Framework
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.2
- * 
- */
-$context['content'] = ob_get_contents();
-ob_end_clean();
-$templates = array('default.twig');
-Timber::render($templates, $context);
+			<div class="clear"></div>
+			</div>
+			<footer id="footer" role="contentinfo">
+				<div id="copyright">
+					<?php echo sprintf( __( '%1$s %2$s %3$s. All Rights Reserved.', 'blankslate' ), '&copy;', date( 'Y' ), esc_html( get_bloginfo( 'name' ) ) ); echo sprintf( __( ' Theme By: %1$s.', 'blankslate' ), '<a href="http://tidythemes.com/">TidyThemes</a>' ); ?>
+				</div>
+			</footer>
+		</div>
+		<?php wp_footer(); ?>
+	</body>
+</html>

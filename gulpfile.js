@@ -12,44 +12,23 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     notify = require('gulp-notify'),
     jshint = require('gulp-jshint'),
+    include = require('gulp-include'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
     scsslint = require('gulp-scss-lint'),
     livereload = require('gulp-livereload'),
-    rjs = require('gulp-requirejs'),
     lr = require('tiny-lr'),
     server = lr();
 
 // Directories
 var SRC = 'dev/',
-    DIST = 'assets/',
-
-// clean the dist directory
-gulp.task('clean', function(){
-  return gulp.src([DIST+'dist/**/*'], {read:false})
-    .pipe(clean());
-});
-
-// clean the views directory
-gulp.task('cleanViews', function(){
-  return gulp.src([DIST+'app/views/**/*'], {read:false})
-    .pipe(clean());
-});
-
-// clean the views directory
-gulp.task('cleanWPFiles', function(){
-  return gulp.src([DIST+'*.php'], {read:false})
-    .pipe(clean());
-});
+    DIST = 'assets/';
 
 // SCSS Compiling and Minification
 gulp.task('scss', function(){
   return gulp.src(SRC + '/scss/app.scss')
-    .pipe(scsslint({
-      'config': '.scsslint.yml'
-    }))
     .pipe(
       sass({
         outputStyle: 'expanded',
@@ -69,10 +48,9 @@ gulp.task('scss', function(){
     .on('error', errorHandler)
     // .pipe(rename({ suffix: '.min' }))
     // .pipe(minifycss())
-    .pipe(gulp.dest(DIST + '/styles') )
+    .pipe(gulp.dest(DIST + '/css') )
     .pipe(livereload(server.listen(44455)));
 });
-
 
 //js linter
 gulp.task('js', function() {
@@ -92,21 +70,34 @@ gulp.task('clean', function() {
     .pipe(clean());
 });
 
-
 // Gulp Watchers
 gulp.task('watchSCSS', function() {
-  gulp.watch(SRC + 'scss/**/*.scss', ['scss']);
-  gulp.watch(SRC + 'scss/*.scss', ['scss']);
+
+  server.listen(35731, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+
+    gulp.watch(SRC + 'scss/**/*.scss', ['scss']);
+    gulp.watch(SRC + 'scss/*.scss', ['scss']);
+  });
 });
 
 gulp.task('watchJS', function() {
-  gulp.watch(SRC + 'js/**/*.js', ['js']);
-  gulp.watch(SRC + 'js/*.js', ['js']);
+
+  server.listen(35732, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    gulp.watch(SRC + 'js/**/*.js', ['js']);
+    gulp.watch(SRC + 'js/*.js', ['js']);
+  });
 });
 
 // Gulp Default Task
 gulp.task('scssBuild', ['scss', 'watchSCSS']);
 gulp.task('jsBuild', ['js','watchJS']);
+gulp.task('default', ['scssBuild','jsBuild']);
 
 
 // Handle the error

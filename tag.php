@@ -1,17 +1,12 @@
-<?php
-/**
- *
- * 
- *
- * 
- * @package BeliefWP Framework
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.2
- */
-
-// Setup the context
-require_once ( get_template_directory() .'/app/util/template-context.php' );
-
-// Render the page
-Timber::render('blog/tag.twig', $context);
+<?php get_header(); ?>
+<section id="content" role="main">
+	<header class="header">
+		<h1 class="entry-title"><?php _e( 'Tag Archives: ', 'blankslate' ); ?><?php single_tag_title(); ?></h1>
+	</header>
+	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+	<?php get_template_part( 'entry' ); ?>
+	<?php endwhile; endif; ?>
+	<?php get_template_part( 'nav', 'below' ); ?>
+</section>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

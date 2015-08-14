@@ -1,17 +1,14 @@
-<?php
-/**
- * Template Name: 404
- *
- *
- * 
- * @package BeliefWP Framework
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.2
- */
-
-// Setup the context
-require_once ( get_template_directory() .'/app/util/template-context.php' );
-
-// Render the page
-Timber::render('pages/404.twig', $context);
+<?php get_header(); ?>
+<section id="content" role="main">
+	<article id="post-0" class="post not-found">
+		<header class="header">
+			<h1 class="entry-title"><?php _e( 'Not Found', 'blankslate' ); ?></h1>
+		</header>
+		<section class="entry-content">
+			<p><?php _e( 'Nothing found for the requested page. Try a search instead?', 'blankslate' ); ?></p>
+			<?php get_search_form(); ?>
+		</section>
+	</article>
+</section>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

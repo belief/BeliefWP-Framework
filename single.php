@@ -1,17 +1,12 @@
-<?php
-/**
- *The template for displaying single posts
- *
- *
- * 
- * @package BeliefWP Framework
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.2
- */
-
-// Setup the context
-require_once ( get_template_directory() .'/app/util/template-context.php' );
-
-// Render the page
-Timber::render('blog/single.twig', $context);
+<?php get_header(); ?>
+<section id="content" role="main">
+	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+	<?php get_template_part( 'entry' ); ?>
+	<?php if ( ! post_password_required() ) comments_template( '', true ); ?>
+	<?php endwhile; endif; ?>
+	<footer class="footer">
+		<?php get_template_part( 'nav', 'below-single' ); ?>
+	</footer>
+</section>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

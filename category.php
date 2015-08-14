@@ -1,17 +1,13 @@
-<?php
-/**
- * The template for displaying posts of category
- *
- *
- * 
- * @package BeliefWP Framework
- * @author  BeliefAgency
- * @license GPL-2.0+
- * @since Belief Theme Theme 1.2
- */
-
-// Setup the context
-require_once ( get_template_directory() .'/app/util/template-context.php' );
-
-// Render the page
-Timber::render('blog/category.twig', $context);
+<?php get_header(); ?>
+<section id="content" role="main">
+	<header class="header">
+		<h1 class="entry-title"><?php _e( 'Category Archives: ', 'blankslate' ); ?><?php single_cat_title(); ?></h1>
+		<?php if ( '' != category_description() ) echo apply_filters( 'archive_meta', '<div class="archive-meta">' . category_description() . '</div>' ); ?>
+	</header>
+	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+	<?php get_template_part( 'entry' ); ?>
+	<?php endwhile; endif; ?>
+	<?php get_template_part( 'nav', 'below' ); ?>
+</section>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

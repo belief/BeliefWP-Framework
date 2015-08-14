@@ -17,9 +17,5 @@ node_modules
 
 # Framework Builds
 # ------------------------------------------------------------
-public/wp-content/plugins
-public/local/*.php
-
-
-# Framework Builds
-# ------------------------------------------------------------
+assets/css
+assets/js
